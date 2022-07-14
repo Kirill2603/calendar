@@ -17,11 +17,12 @@ const NavigateBlock = styled.div`
 
 const DateNow = styled.span`
   color: #dddddd;
-  font-size: 2rem;
+  font-size: 2.4rem;
 `
 
 const NavButtonBlock = styled.div`
   > button {
+    cursor: pointer;
     background-color: #57585a;
     border: 0;
     border-radius: 3px;

@@ -40,6 +40,7 @@ export const App = () => {
         onSetMonth={onSetMonth}
       />
       <Calendar
+        activeDate={activeDate}
         startOfWeek={startOfWeek}
       />
     </>
