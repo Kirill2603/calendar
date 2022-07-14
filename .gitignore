@@ -11,6 +11,12 @@
 # production
 /build
 
+#idea
+.idea
+
+.gitignore
+.prettierrc
+
 # misc
 .DS_Store
 .env.local
