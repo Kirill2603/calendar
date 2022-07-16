@@ -3,7 +3,7 @@ import { Header } from './components/Header'
 import { Navigate } from './components/Navigate'
 import { Calendar } from './components/Calendar'
 import { createGlobalStyle } from 'styled-components'
-import { useGetEventsQuery } from './store/eventsSlice'
+import { useGetEventByIdQuery, useUpdateEventMutation } from './store/eventsSlice'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { setActiveDate } from './store/calendarSlice'
 
@@ -26,7 +26,14 @@ export const App = () => {
   const dispatch = useAppDispatch()
   const { activeDate } = useAppSelector(state => state.calendar)
 
-  // const {data, error,  isLoading} = useGetEventsQuery()
+  const newEvent = {
+    _id: '62d2f3ebe43a7ab13aff10b1',
+    title: 'Fedorrrrr'
+  }
+
+  const [updatedEvent, result] = useUpdateEventMutation()
+
+  console.log(result.data)
 
   const startOfWeek = activeDate.clone().startOf('month').startOf('week')
 
@@ -36,6 +43,7 @@ export const App = () => {
 
   return (
     <>
+      <button onClick={() =>  updatedEvent(newEvent)}>asd</button>
       <GlobalStyle />
       <Header />
       <Navigate
