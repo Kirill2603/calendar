@@ -4,6 +4,7 @@ import { Header } from './components/Header'
 import { Navigate } from './components/Navigate'
 import { Calendar } from './components/Calendar'
 import { createGlobalStyle } from 'styled-components'
+import { useGetEventsQuery } from './store/eventsSlice'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -11,9 +12,19 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
   }
+  #root {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export const App = () => {
+
+  const {data, error,  isLoading} = useGetEventsQuery('')
+
+  console.log(data)
 
   moment.updateLocale('en', { week: { dow: 1 } })
   const [activeDate, setActiveDate] = useState<Moment>(moment())

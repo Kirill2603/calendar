@@ -22,13 +22,15 @@ const DateNow = styled.span`
 
 const NavButtonBlock = styled.div`
   > button {
+    font-size: 1.1rem;
     cursor: pointer;
     background-color: #57585a;
     border: 0;
-    border-radius: 3px;
+    border-radius: 4px; 
     color: white;
-    margin: 1px;
-    padding: 3px 6px 3px 6px ;
+    margin-left: 1px;
+    padding: 1px 7px 1px 7px ;
+    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.64);
   }
 `
 

@@ -9,12 +9,12 @@ type CalendarProps = {
 
 const CalendarGrid = styled.div`
   display: grid;
+  height: 100%;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 30px repeat(6, 1fr);
   background-color: rgba(38, 38, 38, 0.78);
   color: aliceblue;
   grid-gap: 1px;
-
   .weekDays {
     background-color: #1f2022;
     display: flex;
@@ -22,14 +22,13 @@ const CalendarGrid = styled.div`
     align-items: end;
     padding: 0.6rem;
     font-size: 1.2rem;
-    box-shadow: 2px 0px 2px 0px #1f2022;
+    box-shadow: 5px 0px 0px 0px #1f2022;
   }
 `
 
 const CellItem = styled.div<{ isWeekend: boolean }>`
-  min-height: 120px;
+
   background-color: ${props => props.isWeekend ? '#28282a' : '#1f2022'};
-    // color: ${props => props.isWeekend ? '#777779' : '#d7d7d9'};
 
   &:hover {
     background-color: #57585a;
@@ -70,7 +69,10 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate }) => {
             today={dayItem.format('DDMMYYYY') === moment().format('DDMMYYYY')}
             isThisMonth={dayItem.format('MM') === activeDate.format('MM')}
           >
-            <p>{dayItem.format('DD')}</p>
+            <p>
+              {dayItem.format('DD') === '01' ? dayItem.format('MMM ') : ''}
+              {dayItem.format('DD')}
+            </p>
           </Date>
         </CellItem>)}
     </CalendarGrid>
