@@ -22,7 +22,7 @@ const CalendarGrid = styled.div`
     align-items: end;
     padding: 0.6rem;
     font-size: 1.2rem;
-    box-shadow: 5px 0px 0px 0px #1f2022;
+    box-shadow: 5px 0 0 0 #1f2022;
   }
 `
 
@@ -66,7 +66,7 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate }) => {
           key={dayItem.format('DD-MM-YYYY')}
         >
           <Date
-            today={dayItem.format('DDMMYYYY') === moment().format('DDMMYYYY')}
+            today={dayItem.format('DD-MM-YYYY') === moment().format('DD-MM-YYYY')}
             isThisMonth={dayItem.format('MM') === activeDate.format('MM')}
           >
             <p>

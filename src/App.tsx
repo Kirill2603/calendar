@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import moment, { Moment } from 'moment'
+import React from 'react'
 import { Header } from './components/Header'
 import { Navigate } from './components/Navigate'
 import { Calendar } from './components/Calendar'
 import { createGlobalStyle } from 'styled-components'
 import { useGetEventsQuery } from './store/eventsSlice'
+import { useAppDispatch, useAppSelector } from './store/store'
+import { setActiveDate } from './store/calendarSlice'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -22,24 +23,15 @@ const GlobalStyle = createGlobalStyle`
 
 export const App = () => {
 
-  const {data, error,  isLoading} = useGetEventsQuery('')
+  const dispatch = useAppDispatch()
+  const { activeDate } = useAppSelector(state => state.calendar)
 
-  console.log(data)
+  // const {data, error,  isLoading} = useGetEventsQuery()
 
-  moment.updateLocale('en', { week: { dow: 1 } })
-  const [activeDate, setActiveDate] = useState<Moment>(moment())
   const startOfWeek = activeDate.clone().startOf('month').startOf('week')
 
   const onSetMonth = (type: 'next' | 'prev' | 'today') => {
-    if (type === 'next') {
-      setActiveDate(activeDate.clone().add(1, 'month'))
-    }
-    if (type === 'prev') {
-      setActiveDate(activeDate.clone().subtract(1, 'month'))
-    }
-    if (type === 'today') {
-      setActiveDate(moment())
-    }
+    dispatch(setActiveDate({ type }))
   }
 
   return (
