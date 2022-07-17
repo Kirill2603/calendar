@@ -34,7 +34,9 @@ const CellItem = styled.div<{ isWeekend: boolean, isThisMonth: boolean }>`
   justify-content: flex-start;
   background-color: ${props => props.isWeekend ? '#28282a' : '#1f2022'};
   color: ${props => props.isThisMonth ? '' : '#606062'};
-
+  >div,ul{
+    opacity: ${props => props.isThisMonth ? '' : 0.4}; !important;
+  }
   &:hover {
     background-color: #57585a;
   }
@@ -65,11 +67,12 @@ const EventList = styled.ul`
 
 const EventElement = styled.li<{ eventColor: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow' }>`
   width: 90%;
-  margin: 0.2rem auto;
+  margin: 1px auto;
+  color: white;
   background-color: ${props => props.eventColor};
   list-style: none;
   padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-  border-radius: 4px;
+  border-radius: 3px;
 `
 
 export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate }) => {
