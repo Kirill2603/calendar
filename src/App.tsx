@@ -4,6 +4,9 @@ import { Calendar } from './components/Calendar'
 import { createGlobalStyle } from 'styled-components'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { setActiveDate } from './store/calendarSlice'
+import { logDOM } from '@testing-library/react'
+import moment from 'moment'
+import { useGetEventsForMonthQuery } from './store/eventsSlice'
 
 const GlobalStyle = createGlobalStyle`
   * {

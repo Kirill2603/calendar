@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import moment, { Moment } from 'moment'
+import { useGetEventsForMonthQuery } from '../store/eventsSlice'
 
 type CalendarProps = {
   startOfWeek: Moment
@@ -56,6 +57,10 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate }) => {
   const day = startOfWeek.clone().subtract(1, 'day')
   const daysArray: Moment[] = [...Array(totalDays)].map(() => day.add(1, 'day').clone())
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+
+  const {data, isLoading, isError} = useGetEventsForMonthQuery({start: daysArray[0], end: daysArray[41]})
+  console.log(data)
 
   return (
     <CalendarGrid>

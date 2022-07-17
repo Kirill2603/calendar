@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import moment, { Moment } from 'moment'
 
 type Event = {
   _id: string,
@@ -24,14 +25,17 @@ type UpdateEvent = {
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api',
+    baseUrl: 'http://localhost:3001/api/',
   }),
   endpoints: (builder) => ({
     getAllEvents: builder.query<Event[], void>({
       query: () => '/events',
     }),
     getEventById: builder.query<Event, string>({
-      query: (id) => `/events/${id}`,
+      query: (id) => `events/${id}`,
+    }),
+    getEventsForMonth: builder.query<Event, { start: Moment, end: Moment }>({
+      query: ({ start, end }) => `events?start=${ start.unix() * 1000 }&end=${ end.unix() * 1000 }`,
     }),
     updateEvent: builder.mutation<Event, Pick<Event, '_id'> & Partial<Event>>({
       query: ({ _id, ...updatedEvent }) => ({
@@ -43,4 +47,9 @@ export const eventsApi = createApi({
   }),
 })
 
-export const { useGetAllEventsQuery, useGetEventByIdQuery, useUpdateEventMutation } = eventsApi
+export const {
+  useGetAllEventsQuery,
+  useGetEventByIdQuery,
+  useUpdateEventMutation,
+  useGetEventsForMonthQuery,
+} = eventsApi
