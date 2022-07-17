@@ -39,9 +39,9 @@ export const Navigate: FC<NavigateProps> = ({today, onSetMonth}) => {
     <NavigateBlock>
       <DateNow><b>{today.format('MMMM')}</b> {today.format('YYYY')}</DateNow>
       <NavButtonBlock>
-        <button onClick={() => onSetMonth('prev')}>{'<'}</button>
-        <button onClick={() => onSetMonth('today')}>Today</button>
-        <button onClick={() => onSetMonth('next')}>{'>'}</button>
+        <button type='button' onClick={() => onSetMonth('prev')}>prev</button>
+        <button type='button' onClick={() => onSetMonth('today')}>Today</button>
+        <button type='button' onClick={() => onSetMonth('next')}>next</button>
       </NavButtonBlock>
     </NavigateBlock>
   )
