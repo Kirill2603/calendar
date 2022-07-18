@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import moment, { Moment } from 'moment'
 import { useGetEventsForMonthQuery } from '../../store/eventsSlice'
-import { CalendarGrid, CellItem, Date, EventElement, EventList } from './Calendar.styles'
-import { Navigate } from '../Navigate/Navigate'
-import { Modal } from '../Modal/Modal'
+import { CalendarGrid, CellItem, Date, EventList } from './Calendar.styles'
+import { Navigate } from './Navigate/Navigate'
+import { EventElement } from './EventElement/EventElement'
 
 type CalendarProps = {
   startOfWeek: Moment
@@ -20,7 +20,6 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate, onSetMont
   const { data, isLoading, isError } = useGetEventsForMonthQuery({ start: daysArray[0], end: daysArray[41] })
 
   const [isModalActive, setIsModalActive] = useState<boolean>(false)
-  console.log(isModalActive)
 
   return (
     <div  style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
@@ -28,7 +27,6 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate, onSetMont
         activeDate={activeDate}
         onSetMonth={onSetMonth}
       />
-
       <CalendarGrid>
         {daysOfWeek.map((day) => <div className='weekDays' key={day}>{day}</div>)}
         {daysArray.map((dayItem) =>
@@ -50,12 +48,11 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate, onSetMont
                 data && data.filter(event => moment(event.date).format('DD-MM-YYYY') === dayItem.format('DD-MM-YYYY'))
                   .map((event) =>
                     <EventElement
-                      onClick={() => setIsModalActive(true)}
                       key={event._id}
-                      eventColor={event.color}>
-                      {event.title}
-                      <Modal active={isModalActive} setActive={setIsModalActive} />
-                    </EventElement>)
+                      isModalActive={isModalActive}
+                      setIsModalActive={setIsModalActive}
+                      event={event}/>
+                  )
               }
             </EventList>
           </CellItem>)}

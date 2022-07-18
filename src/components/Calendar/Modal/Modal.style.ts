@@ -13,6 +13,7 @@ export const ModalStyle = styled.div<{active: boolean}>`
   transition: 0.3s;
   pointer-events: ${props => props.active ? 'all' : 'none'};
   opacity: ${props => props.active ? '1' : '0'};
+  z-index: 2;
 `
 
 export const ModalContent = styled.div`

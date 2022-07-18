@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Moment } from 'moment'
 
-type Event = {
+export type Event = {
   _id: string,
   title: string,
   description: string,
