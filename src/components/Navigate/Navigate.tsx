@@ -1,24 +1,12 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { Moment } from 'moment'
+import { DateNow, NavigateBlock } from './Navigate.styles'
 
 type NavigateProps = {
   today: Moment
   onSetMonth: (type: 'next' | 'prev' | 'today') => void
 }
-
-const NavigateBlock = styled.div`
-  background-color: #1f2022;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 1rem;
-`
-
-const DateNow = styled.span`
-  color: #dddddd;
-  font-size: 2.4rem;
-`
 
 const NavButtonBlock = styled.div`
   > button {
