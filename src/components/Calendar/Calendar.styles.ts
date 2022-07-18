@@ -59,14 +59,3 @@ export const EventList = styled.ul`
   justify-content: flex-start;
   align-items: flex-start;
 `
-
-// export const EventElement = styled.li<{ eventColor: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow' }>`
-//   width: 90%;
-//   margin: 1px auto;
-//   color: white;
-//   background-color: ${props => props.eventColor};
-//   list-style: none;
-//   padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-//   border-radius: 3px;
-//   cursor: pointer;
-// `

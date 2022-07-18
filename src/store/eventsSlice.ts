@@ -26,7 +26,7 @@ type UpdateEvent = {
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001/api/',
+    baseUrl: 'https://evening-coast-03343.herokuapp.com/api/',
   }),
   endpoints: (builder) => ({
     getAllEvents: builder.query<Event[], void>({
