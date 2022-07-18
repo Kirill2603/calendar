@@ -5,4 +5,8 @@ export const SidebarStyles = styled.div`
   width: 300px;
   height: 100%;
   background-color: #1f2022;
+  border-right: 1px solid #57585a;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `

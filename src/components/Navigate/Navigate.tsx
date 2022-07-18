@@ -4,7 +4,7 @@ import { Moment } from 'moment'
 import { DateNow, NavigateBlock } from './Navigate.styles'
 
 type NavigateProps = {
-  today: Moment
+  activeDate: Moment
   onSetMonth: (type: 'next' | 'prev' | 'today') => void
 }
 
@@ -22,10 +22,10 @@ const NavButtonBlock = styled.div`
   }
 `
 
-export const Navigate: FC<NavigateProps> = ({today, onSetMonth}) => {
+export const Navigate: FC<NavigateProps> = ({activeDate, onSetMonth}) => {
   return (
     <NavigateBlock>
-      <DateNow><b>{today.format('MMMM')}</b> {today.format('YYYY')}</DateNow>
+      <DateNow><b>{activeDate.format('MMMM')}</b> {activeDate.format('YYYY')}</DateNow>
       <NavButtonBlock>
         <button type='button' onClick={() => onSetMonth('prev')}>{'<'}</button>
         <button type='button' onClick={() => onSetMonth('today')}>Today</button>

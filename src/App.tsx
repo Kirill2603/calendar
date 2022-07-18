@@ -1,12 +1,11 @@
 import React from 'react'
-import { Navigate } from './components/Navigate/Navigate'
 import { Calendar } from './components/Calendar/Calendar'
 import { useAppDispatch, useAppSelector } from './store/store'
-import { setActiveDate } from './store/calendarSlice'
 import { CSSReset } from './GlobalStyles/CSSReset'
 import { GlobalStyle } from './GlobalStyles/GlobalStyle'
 import { Sidebar } from './components/Sidebar/Sidebar'
 import styled from 'styled-components'
+import { setCalendarActiveDate } from './store/calendarSlice'
 
 const AppLayout = styled.div`
   display: flex;
@@ -18,26 +17,23 @@ const AppLayout = styled.div`
 export const App = () => {
 
   const dispatch = useAppDispatch()
-  const { activeDate } = useAppSelector(state => state.calendar)
+  const { calendarActiveDate } = useAppSelector(state => state.calendar)
 
-  const startOfWeek = activeDate.clone().startOf('month').startOf('week')
+  const startOfWeek = calendarActiveDate.clone().startOf('month').startOf('week')
 
   const onSetMonth = (type: 'next' | 'prev' | 'today') => {
-    dispatch(setActiveDate({ type }))
+    dispatch(setCalendarActiveDate({ type }))
   }
 
   return (
     <>
       <GlobalStyle />
       <CSSReset />
-      <Navigate
-        today={activeDate}
-        onSetMonth={onSetMonth}
-      />
       <AppLayout >
         <Sidebar/>
         <Calendar
-          activeDate={activeDate}
+          onSetMonth={onSetMonth}
+          activeDate={calendarActiveDate}
           startOfWeek={startOfWeek}
         />
       </AppLayout>
