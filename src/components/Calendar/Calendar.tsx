@@ -12,6 +12,7 @@ type CalendarProps = {
   onSetMonth: (type: 'next' | 'prev' | 'today') => void
 }
 
+
 export const Calendar: FC<CalendarProps> = ({ startOfWeek, activeDate, onSetMonth }) => {
 
   const totalDays = 42
