@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const MiniCalendarStyles = styled.div`
+export const MiniCalendarGrid = styled.div`
   
   height: 230px;
   display: grid;

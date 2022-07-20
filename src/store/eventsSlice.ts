@@ -13,16 +13,6 @@ export type Event = {
   to: Date
 }
 
-type UpdateEvent = {
-  title: string,
-  description: string,
-  is_done: boolean,
-  priority: 'low' | 'middle' | 'high'
-  date: Date
-  from: Date
-  to: Date
-}
-
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
   baseQuery: fetchBaseQuery({

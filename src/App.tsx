@@ -4,15 +4,9 @@ import { useAppDispatch, useAppSelector } from './store/store'
 import { CSSReset } from './GlobalStyles/CSSReset'
 import { GlobalStyle } from './GlobalStyles/GlobalStyle'
 import { Sidebar } from './components/Sidebar/Sidebar'
-import styled from 'styled-components'
 import { setCalendarActiveDate } from './store/calendarSlice'
+import { AppLayout } from './App.styles'
 
-const AppLayout = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  height: 100%;
-`
 
 export const App = () => {
 

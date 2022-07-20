@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { MiniCalendarDate, MiniCalendarNavigate, MiniCalendarStyles } from './MiniCalendar.styles'
+import { MiniCalendarDate, MiniCalendarNavigate, MiniCalendarGrid } from './MiniCalendar.styles'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import moment, { Moment } from 'moment'
-import { setCalendarActiveDate, setMiniCalendarActiveDate } from '../../store/calendarSlice'
+import { setMiniCalendarActiveDate } from '../../store/calendarSlice'
 
 type MiniCalendarProps = {
 
@@ -28,7 +28,7 @@ export const MiniCalendar: FC<MiniCalendarProps> = () => {
         <p>{miniCalendarActiveDate.format('MMMM YYYY')}</p>
         <button onClick={() => onSetMonth('next')}>{'>'}</button>
       </MiniCalendarNavigate>
-      <MiniCalendarStyles>
+      <MiniCalendarGrid>
         {daysOfWeek.map((day, index) => <div className='weekDays' key={index}>{day}</div>)}
         {daysArray.map((date) =>
           <MiniCalendarDate
@@ -37,7 +37,7 @@ export const MiniCalendar: FC<MiniCalendarProps> = () => {
             today={date.format('DD-MM-YYYY') === moment().format('DD-MM-YYYY')}>
             {date.format('DD')}
           </MiniCalendarDate>)}
-      </MiniCalendarStyles>
+      </MiniCalendarGrid>
     </>
   )
 }
