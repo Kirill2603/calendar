@@ -1,36 +1,24 @@
 import React from 'react'
-import { Calendar } from './components/Calendar/Calendar'
-import { useAppDispatch, useAppSelector } from './store/store'
-import { CSSReset } from './GlobalStyles/CSSReset'
-import { GlobalStyle } from './GlobalStyles/GlobalStyle'
-import { Sidebar } from './components/Sidebar/Sidebar'
-import { setCalendarActiveDate } from './store/calendarSlice'
-import { AppLayout } from './App.styles'
+import { useAppSelector } from './store/store'
+import { Calendar } from './components/Calendar'
+import { Button, useColorMode } from '@chakra-ui/react'
+import { Navigate } from './components/Navigate'
 
 
 export const App = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
 
-  const dispatch = useAppDispatch()
   const { calendarActiveDate } = useAppSelector(state => state.calendar)
 
   const startOfWeek = calendarActiveDate.clone().startOf('month').startOf('week')
 
-  const onSetMonth = (type: 'next' | 'prev' | 'today') => {
-    dispatch(setCalendarActiveDate({ type }))
-  }
-
   return (
     <>
-      <GlobalStyle />
-      <CSSReset />
-      <AppLayout >
-        <Sidebar/>
-        <Calendar
-          onSetMonth={onSetMonth}
-          activeDate={calendarActiveDate}
-          startOfWeek={startOfWeek}
-        />
-      </AppLayout>
+      <Button onClick={toggleColorMode}>
+        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+      </Button>
+      <Navigate calendarActiveDate={calendarActiveDate}/>
+      <Calendar startOfWeek={startOfWeek} calendarActiveDate={calendarActiveDate}/>
     </>
   )
 }
