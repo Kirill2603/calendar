@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import {
   Button, Center, Popover, PopoverArrow, PopoverCloseButton, PopoverContent, PopoverHeader,
   PopoverTrigger,
@@ -16,7 +16,9 @@ type DatePopoverProps = {
 }
 
 export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpen }) => {
-  console.log(events)
+
+  const [createMode, setCreateMod] = useState(false)
+
   return (
     <Popover placement='right'
              returnFocusOnClose={false}
@@ -35,8 +37,8 @@ export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpe
         </PopoverHeader>
         <PopoverCloseButton />
 
-        {events && events.length === 0 && < AddEventPopoverBody />}
-        {events && events.length > 0 && <WithEventPopoverBody events={events} />}
+        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody /> }
+        {(events && events.length > 0 && !createMode) && <WithEventPopoverBody events={events} setCreateMod={setCreateMod} />}
 
       </PopoverContent>
     </Popover>

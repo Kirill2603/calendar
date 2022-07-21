@@ -5,9 +5,10 @@ import { Event } from '../store/eventsSlice'
 
 type WithEventPopoverBodyProps = {
   events: Event[]
+  setCreateMod: (createMode: boolean) => void
 }
 
-export const WithEventPopoverBody: FC<WithEventPopoverBodyProps> = ({ events }) => {
+export const WithEventPopoverBody: FC<WithEventPopoverBodyProps> = ({ events, setCreateMod }) => {
   return (
     <PopoverBody>
       <Flex direction='column' justify='flex-start' align='flex-start'>
@@ -41,7 +42,10 @@ export const WithEventPopoverBody: FC<WithEventPopoverBodyProps> = ({ events }) 
           </Alert>,
         )}
       </Flex>
-      <Button my={2} colorScheme='green'>Create</Button>
+      <Button
+        onClick={() => setCreateMod(true)}
+        my={2}
+        colorScheme='green'>Create</Button>
     </PopoverBody>
   )
 }
