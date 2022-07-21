@@ -13,6 +13,17 @@ export type Event = {
   to: Date
 }
 
+export type newEvent = {
+  title: string,
+  description?: string,
+  is_done?: boolean,
+  color?: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
+  priority?: 'low' | 'middle' | 'high'
+  date: number
+  from?: number
+  to?: number
+}
+
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
   baseQuery: fetchBaseQuery({
@@ -28,6 +39,13 @@ export const eventsApi = createApi({
     getEventsForMonth: builder.query<Event[], { start: Moment, end: Moment }>({
       query: ({ start, end }) => `events?start=${ start.format("x") }&end=${ end.format("x") }`,
     }),
+    addEvent: builder.mutation<Event, newEvent>({
+      query: (newEvent) => ({
+        url: `/events`,
+        method: 'POST',
+        body: newEvent,
+      }),
+    }),
     updateEvent: builder.mutation<Event, Pick<Event, '_id'> & Partial<Event>>({
       query: ({ _id, ...updatedEvent }) => ({
         url: `/events/${_id}`,
@@ -42,5 +60,6 @@ export const {
   useGetAllEventsQuery,
   useGetEventByIdQuery,
   useUpdateEventMutation,
+  useAddEventMutation,
   useGetEventsForMonthQuery,
 } = eventsApi

@@ -37,7 +37,7 @@ export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpe
         </PopoverHeader>
         <PopoverCloseButton />
 
-        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody /> }
+        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody eventDate={day}/> }
         {(events && events.length > 0 && !createMode) && <WithEventPopoverBody events={events} setCreateMod={setCreateMod} />}
 
       </PopoverContent>
