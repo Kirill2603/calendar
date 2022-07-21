@@ -1,12 +1,12 @@
 import React from 'react'
 import { useAppSelector } from './store/store'
 import { Calendar } from './components/Calendar'
-import { Button, useColorMode } from '@chakra-ui/react'
 import { Navigate } from './components/Navigate'
+import { Header } from './components/Header'
 
 
 export const App = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
+
 
   const { calendarActiveDate } = useAppSelector(state => state.calendar)
 
@@ -14,9 +14,7 @@ export const App = () => {
 
   return (
     <>
-      <Button onClick={toggleColorMode}>
-        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-      </Button>
+      <Header />
       <Navigate calendarActiveDate={calendarActiveDate}/>
       <Calendar startOfWeek={startOfWeek} calendarActiveDate={calendarActiveDate}/>
     </>

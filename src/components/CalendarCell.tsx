@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Badge, Button, Flex, Text, useDisclosure } from '@chakra-ui/react'
 import { Event } from '../store/eventsSlice'
 import moment, { Moment } from 'moment'
-import { DatePopover } from './DatePopover'
+import { EventPopover } from './EventPopover'
 
 type CalendarCellProps = {
   day: Moment
@@ -26,21 +26,19 @@ export const CalendarCell: FC<CalendarCellProps> = ({ day, events, isThisMonth, 
         <Button
           variant={isActiveDay ? 'solid' : 'ghost'}
           colorScheme={isActiveDay ? 'red' : ''}
-          // backgroundColor={isActiveDay ? '#f64733' : ''}
-          // borderRadius={isActiveDay ? '4px' : ''}
+          borderRadius='full'
           opacity={isThisMonth ? '' : '0.4'}
           onClick={onToggle}
           cursor='pointer'
           px={2}
           fontSize='2xl'>{moment(day).format('DD')}</Button>
-        {isOpen && <DatePopover isOpen={isOpen} onClose={onClose} day={day} />}
+          {isOpen && <EventPopover isOpen={isOpen} onClose={onClose} day={day} events={events}/>}
       </Flex>
       <Flex
         direction='column'
-        align='flex-start'
         justify='flex-start'>
         {events?.map(event =>
-          <Badge key={event._id} colorScheme={event.color}>{event.title}</Badge>,
+          <Badge variant='subtle' fontSize='0.9rem' px={2} ml={1} my={0.5} key={event._id} colorScheme={event.color}>{event.title}</Badge>,
         )}
       </Flex>
     </Flex>
