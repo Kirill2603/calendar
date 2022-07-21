@@ -9,13 +9,22 @@ import {
   PopoverBody,
   PopoverTrigger,
   Textarea,
-  Grid, Box, Popover, PopoverContent, PopoverHeader, PopoverArrow,
+  Grid,
+  Box,
+  Popover,
+  PopoverContent,
+  PopoverHeader,
+  PopoverArrow,
+  NumberIncrementStepper,
+  NumberInputStepper,
+  NumberDecrementStepper, Select,
 } from '@chakra-ui/react'
 import { ArrowForwardIcon, ChatIcon, Icon, StarIcon } from '@chakra-ui/icons'
 import { FaCircle, FaClock, FaMapMarkerAlt } from 'react-icons/fa'
 import { MdOutlineColorLens } from 'react-icons/md'
 import moment, { Moment } from 'moment'
 import { newEvent, useAddEventMutation } from '../store/eventsSlice'
+import { log } from 'util'
 
 type AddEventPopoverBodyProps = {
   eventDate: Moment
@@ -26,9 +35,9 @@ export const AddEventPopoverBody: FC<AddEventPopoverBodyProps> = ({eventDate}) =
   const [addEventState, setAddEventState] = useState<newEvent>({
     title: '',
     description: '',
-    // start: moment().format('HH:mm'),
-    // end: moment().add(15, 'minutes').format('HH:mm'),
     date: Number(moment(eventDate).format("x")),
+    start: Number(moment().format("x")),
+    end: Number(moment().add(1, 'hour').add(1, 'minutes').format("x")),
     color: undefined,
     // isDone: false,
   })
@@ -38,6 +47,21 @@ export const AddEventPopoverBody: FC<AddEventPopoverBodyProps> = ({eventDate}) =
   const colors: Array<'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'> = ['red', 'green', 'blue', 'purple', 'orange', 'yellow']
 
   const timeNow = moment().format('HH:mm')
+
+
+  const setTime = (time: string) => Number(
+    moment(eventDate)
+      .clone()
+      .hour(Number(time.slice(0,2)))
+      .minutes(Number(time.slice(3,5)))
+      .format('x')
+  )
+
+
+
+  console.log(setTime('12:12'))
+  console.log(setTime('23:23'))
+
 
   return (
     <PopoverBody>
@@ -79,23 +103,30 @@ export const AddEventPopoverBody: FC<AddEventPopoverBodyProps> = ({eventDate}) =
           value={addEventState.description}
           onChange={(event) => setAddEventState({ ...addEventState, description: event.target.value })} />
       </HStack>
-      {/*<HStack py={2}>*/}
-      {/*  <Icon as={FaClock} />*/}
-      {/*  <Input*/}
-      {/*    type='time'*/}
-      {/*    variant='outline'*/}
-      {/*    min='00:00' max='24:00'*/}
-      {/*    value={addEventState.start}*/}
-      {/*    onChange={() => {*/}
-      {/*    }} />*/}
-      {/*  <ArrowForwardIcon />*/}
-      {/*  <Input*/}
-      {/*    type='time'*/}
-      {/*    variant='outline'*/}
-      {/*    value={addEventState.end}*/}
-      {/*    onChange={() => {*/}
-      {/*    }} />*/}
-      {/*</HStack>*/}
+      <HStack py={2}>
+        <Icon as={FaClock} />
+        {/*<Select placeholder='Select option'>*/}
+        {/*  {hours.map(hour => <option value='hour'>{hour}</option>)}*/}
+        {/*</Select>*/}
+        {/*<Select placeholder='Select option'>*/}
+        {/*  {minutes.map(minute => <option value='minute'>{minute}</option>)}*/}
+        {/*</Select>*/}
+        <Input
+          type='time'
+          variant='outline'
+          min='00:00' max='23:59'
+          value={moment(addEventState.start).clone().format('HH:mm')}
+          onChange={(event) => {setAddEventState({...addEventState, start: setTime(event.target.value)})}} >
+        </Input>
+        <ArrowForwardIcon />
+        <Input
+          type='time'
+          variant='outline'
+          min='00:00' max='23:59'
+          value={moment(addEventState.end).clone().format('HH:mm')}
+          onChange={(event) => {setAddEventState({...addEventState, end: setTime(event.target.value)})}} >
+        </Input>
+      </HStack>
       {/*<HStack py={2}>*/}
       {/*  <Icon as={FaMapMarkerAlt} /> <Input variant='outline' placeholder='Place' />*/}
       {/*</HStack>*/}

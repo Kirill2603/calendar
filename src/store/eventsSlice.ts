@@ -8,9 +8,9 @@ export type Event = {
   is_done: boolean,
   color: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
   priority: 'low' | 'middle' | 'high'
-  date: Date
-  from: Date
-  to: Date
+  date: number
+  start: number
+  end: number
 }
 
 export type newEvent = {
@@ -20,8 +20,8 @@ export type newEvent = {
   color?: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
   priority?: 'low' | 'middle' | 'high'
   date: number
-  from?: number
-  to?: number
+  start?: number
+  end?: number
 }
 
 export const eventsApi = createApi({

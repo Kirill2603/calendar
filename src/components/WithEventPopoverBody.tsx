@@ -24,11 +24,11 @@ export const WithEventPopoverBody: FC<WithEventPopoverBodyProps> = ({ events, se
             key={event._id}>
             <Flex direction='row' justify='space-between' align='center' w='full'>
                 {
-                  (event.from && event.to)
+                  (event.start && event.end)
                     ?
                     <Flex px={2} direction='column' align='flex-start' justify='flex-start'>
-                      <Text>{(event.from && event.to) ? moment(event.from).format('HH : MM') : 'All day '}</Text>
-                      <Text>{(event.from && event.to) ? moment(event.to).format('HH : MM') : 'All day '}</Text>
+                      <Text whiteSpace='nowrap'>{(event.start && event.end) && moment(event.start).format('kk : mm')}</Text>
+                      <Text>{(event.start && event.end) && moment(event.end).format('kk : mm')}</Text>
                     </Flex>
                     :
                     <Text px={2}>All day</Text>
