@@ -9,7 +9,7 @@ type NavigateProps = {
   calendarActiveDate: Moment
 }
 
-export const Navigate: FC<NavigateProps> = ({calendarActiveDate}) => {
+export const Navigate: FC<NavigateProps> = ({ calendarActiveDate }) => {
 
   const dispatch = useAppDispatch()
 
@@ -19,18 +19,21 @@ export const Navigate: FC<NavigateProps> = ({calendarActiveDate}) => {
 
   return (
     <Flex justify='space-between' align='center' px={2}>
-      <Heading size='2xl'>{calendarActiveDate.format('MMMM YYYY')}</Heading>
+      <Flex>
+        <Heading size='2xl' pr={3}>{calendarActiveDate.format('MMMM ')}</Heading>
+        <Heading size='2xl' fontWeight='normal'>{calendarActiveDate.format(' YYYY')}</Heading>
+      </Flex>
       <nav>
         <ButtonGroup size='sm' isAttached variant='outline'>
           <IconButton
             onClick={() => onSetMonth('prev')}
             aria-label='prev'
-            icon={<FaAngleLeft />}/>
-          <Button onClick={() => onSetMonth('today')}>Cancel</Button>
+            icon={<FaAngleLeft />} />
+          <Button onClick={() => onSetMonth('today')}>Today</Button>
           <IconButton
             onClick={() => onSetMonth('next')}
             aria-label='prev'
-            icon={<FaAngleRight />}/>
+            icon={<FaAngleRight />} />
         </ButtonGroup>
       </nav>
     </Flex>
