@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import {
   Button, Center, Popover, PopoverArrow, PopoverCloseButton, PopoverContent, PopoverHeader,
-  PopoverTrigger, useDisclosure,
+  PopoverTrigger,
 } from '@chakra-ui/react'
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 import { Event } from '../store/eventsSlice'
 import { AddEventPopoverBody } from './AddEventPopoverBody'
 import { WithEventPopoverBody } from './WithEventPopoverBody'
@@ -41,7 +41,7 @@ export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpe
         </PopoverHeader>
         <PopoverCloseButton />
 
-        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody eventDate={day} onClose={onClose} refetch={refetch}/> }
+        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody eventDate={Number(moment(day).format('x'))} onClose={onClose} refetch={refetch}/> }
         {(events && events.length > 0 && !createMode) && <WithEventPopoverBody events={events} setCreateMod={setCreateMod} />}
 
       </PopoverContent>

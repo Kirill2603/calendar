@@ -3,29 +3,21 @@ import {
   Button,
   Flex,
   HStack,
-  IconButton,
   Input,
   PopoverBody,
-  PopoverTrigger,
   Textarea,
-  Grid,
   Box,
-  Popover,
-  PopoverContent,
-  PopoverHeader,
-  PopoverArrow, useDisclosure,
 } from '@chakra-ui/react'
-import { ArrowForwardIcon, ChatIcon, Icon, StarIcon } from '@chakra-ui/icons'
-import { FaCircle, FaClock, FaMapMarkerAlt } from 'react-icons/fa'
-import { MdOutlineColorLens } from 'react-icons/md'
-import moment, { Moment } from 'moment'
-import { newEvent, useAddEventMutation, useLazyGetEventsForMonthQuery } from '../store/eventsSlice'
+import {  ChatIcon, Icon } from '@chakra-ui/icons'
+import { FaMapMarkerAlt } from 'react-icons/fa'
+import moment from 'moment'
+import { Event, useAddEventMutation } from '../store/eventsSlice'
 import { ColorsPopover } from './ColorPopover'
 import { TimePicker } from './TimePicker'
 
 
 type AddEventPopoverBodyProps = {
-  eventDate: Moment
+  eventDate: number
   onClose: () => void
   refetch: () => void
 }
@@ -34,7 +26,7 @@ export const AddEventPopoverBody: FC<AddEventPopoverBodyProps> = ({ eventDate , 
 
   const [addEvent, { isLoading }] = useAddEventMutation()
 
-  const [addEventState, setAddEventState] = useState<newEvent>({
+  const [currentEventState, setCurrentEventState] = useState<Event>({
     title: '',
     description: '',
     date: Number(moment(eventDate).format('x')),
@@ -44,7 +36,7 @@ export const AddEventPopoverBody: FC<AddEventPopoverBodyProps> = ({ eventDate , 
   })
 
   const onAddEvent = async () => {
-    await addEvent(addEventState)
+    await addEvent(currentEventState)
     await refetch()
     onClose()
   }
@@ -54,29 +46,29 @@ export const AddEventPopoverBody: FC<AddEventPopoverBodyProps> = ({ eventDate , 
       <HStack pb={2}>
         <Box pl={6}>
           <ColorsPopover
-            addEventState={addEventState}
-            setAddEventState={setAddEventState}
-            color={addEventState.color}
+            currentEventState={currentEventState}
+            setCurrentEventState={setCurrentEventState}
+            color={currentEventState.color}
           />
         </Box>
         <Input variant='outline'
                placeholder='Title'
-               value={addEventState.title}
-               onChange={(event) => setAddEventState({ ...addEventState, title: event.target.value })} />
+               value={currentEventState.title}
+               onChange={(event) => setCurrentEventState({ ...currentEventState, title: event.target.value })} />
       </HStack>
       <HStack pb={2}>
         <ChatIcon />
         <Textarea
           variant='outline'
           placeholder='Description'
-          value={addEventState.description}
-          onChange={(event) => setAddEventState({ ...addEventState, description: event.target.value })} />
+          value={currentEventState.description}
+          onChange={(event) => setCurrentEventState({ ...currentEventState, description: event.target.value })} />
       </HStack>
       <TimePicker
-        start={addEventState.start}
-        end={addEventState.end}
-        addEventState={addEventState}
-        setAddEventState={setAddEventState}
+        start={currentEventState.start}
+        end={currentEventState.end}
+        addEventState={currentEventState}
+        setAddEventState={setCurrentEventState}
         eventDate={eventDate}/>
       <HStack py={2}>
         <Icon as={FaMapMarkerAlt} /> <Input variant='outline' placeholder='Place' />

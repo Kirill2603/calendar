@@ -2,15 +2,15 @@ import React, { FC } from 'react'
 import { ArrowForwardIcon, Icon } from '@chakra-ui/icons'
 import { FaClock } from 'react-icons/fa'
 import { HStack, Input } from '@chakra-ui/react'
-import moment, { Moment } from 'moment'
-import { newEvent } from '../store/eventsSlice'
+import moment from 'moment'
+import { Event } from '../store/eventsSlice'
 
 type TimePickerProps = {
   start: number | undefined
   end: number | undefined
-  addEventState: newEvent
-  setAddEventState: (addEventState: newEvent) => void
-  eventDate: Moment
+  addEventState: Event
+  setAddEventState: (addEventState: Event) => void
+  eventDate: number
 }
 
 export const TimePicker: FC<TimePickerProps> = ({ start, end, addEventState, setAddEventState, eventDate }) => {

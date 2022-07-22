@@ -2,18 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Moment } from 'moment'
 
 export type Event = {
-  _id: string,
-  title: string,
-  description: string,
-  is_done: boolean,
-  color: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
-  priority: 'low' | 'middle' | 'high'
-  date: number
-  start: number
-  end: number
-}
-
-export type newEvent = {
+  _id?: string,
   title: string,
   description?: string,
   is_done?: boolean,
@@ -39,7 +28,7 @@ export const eventsApi = createApi({
     getEventsForMonth: builder.query<Event[], { start: Moment, end: Moment }>({
       query: ({ start, end }) => `events?start=${ start.format("x") }&end=${ end.format("x") }`,
     }),
-    addEvent: builder.mutation<Event, newEvent>({
+    addEvent: builder.mutation<Event, Event>({
       query: (newEvent) => ({
         url: `/events`,
         method: 'POST',
@@ -53,6 +42,12 @@ export const eventsApi = createApi({
         body: updatedEvent,
       }),
     }),
+    deleteEvent: builder.mutation<Event, string>({
+      query: (_id) => ({
+        url: `/events/${_id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
@@ -62,5 +57,5 @@ export const {
   useUpdateEventMutation,
   useAddEventMutation,
   useGetEventsForMonthQuery,
-  useLazyGetEventsForMonthQuery
+  useDeleteEventMutation,
 } = eventsApi

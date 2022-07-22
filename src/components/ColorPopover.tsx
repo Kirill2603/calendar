@@ -10,16 +10,16 @@ import {
 } from '@chakra-ui/react'
 import { MdOutlineColorLens } from 'react-icons/md'
 import { FaCircle } from 'react-icons/fa'
-import { newEvent } from '../store/eventsSlice'
-import { Moment } from 'moment'
+import { Event } from '../store/eventsSlice'
 
 type ColorsPopoverProps = {
   color: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow' | undefined
-  addEventState: newEvent
-  setAddEventState: (addEventState: newEvent) => void
+  currentEventState: Event
+  setCurrentEventState: (currentEventState: Event) => void
+
 }
 
-export const ColorsPopover: FC<ColorsPopoverProps> = ({ color, addEventState, setAddEventState }) => {
+export const ColorsPopover: FC<ColorsPopoverProps> = ({ color, currentEventState, setCurrentEventState }) => {
 
   const colors: Array<'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'> = ['red', 'green', 'blue', 'purple', 'orange', 'yellow']
 
@@ -42,7 +42,7 @@ export const ColorsPopover: FC<ColorsPopoverProps> = ({ color, addEventState, se
               as={'li'}
               m={2}
               aria-label={color}
-              onClick={() => setAddEventState({ ...addEventState, color: color })}
+              onClick={() => setCurrentEventState({ ...currentEventState, color: color })}
               icon={<FaCircle fill={color} />} />,
           )}
         </Grid>
