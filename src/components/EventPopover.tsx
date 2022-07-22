@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import {
   Button, Center, Popover, PopoverArrow, PopoverCloseButton, PopoverContent, PopoverHeader,
-  PopoverTrigger,
+  PopoverTrigger, useDisclosure,
 } from '@chakra-ui/react'
 import { Moment } from 'moment'
 import { Event } from '../store/eventsSlice'
@@ -13,9 +13,10 @@ type DatePopoverProps = {
   events: Event[] | undefined
   isOpen: boolean
   onClose: () => void
+  refetch: () => void
 }
 
-export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpen }) => {
+export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpen, refetch }) => {
 
   const [createMode, setCreateMod] = useState(false)
 
@@ -26,7 +27,10 @@ export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpe
              onClose={onClose}
     >
       <PopoverTrigger>
-        <Button opacity='0.1' variant='ghost' position='absolute'></Button>
+        <Button
+          opacity='0.1'
+          variant='ghost'
+          position='absolute'></Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
@@ -37,7 +41,7 @@ export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpe
         </PopoverHeader>
         <PopoverCloseButton />
 
-        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody eventDate={day}/> }
+        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody eventDate={day} onClose={onClose} refetch={refetch}/> }
         {(events && events.length > 0 && !createMode) && <WithEventPopoverBody events={events} setCreateMod={setCreateMod} />}
 
       </PopoverContent>

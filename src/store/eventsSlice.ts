@@ -62,4 +62,5 @@ export const {
   useUpdateEventMutation,
   useAddEventMutation,
   useGetEventsForMonthQuery,
+  useLazyGetEventsForMonthQuery
 } = eventsApi

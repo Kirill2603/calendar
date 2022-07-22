@@ -10,9 +10,15 @@ type CalendarCellProps = {
   isThisMonth: boolean
   isActiveDay: boolean
   isDayOff: boolean
+  refetch: () => void
 }
 
-export const CalendarCell: FC<CalendarCellProps> = ({ day, events, isThisMonth, isActiveDay, isDayOff }) => {
+export const CalendarCell: FC<CalendarCellProps> = ({ day,
+                                                      events,
+                                                      isThisMonth,
+                                                      isActiveDay,
+                                                      isDayOff,
+                                                      refetch }) => {
 
   const { isOpen, onToggle, onClose } = useDisclosure()
 
@@ -32,7 +38,7 @@ export const CalendarCell: FC<CalendarCellProps> = ({ day, events, isThisMonth, 
           cursor='pointer'
           px={2}
           fontSize='2xl'>{moment(day).format('DD')}</Button>
-          {isOpen && <EventPopover isOpen={isOpen} onClose={onClose} day={day} events={events}/>}
+          {isOpen && <EventPopover isOpen={isOpen} onClose={onClose} day={day} events={events} refetch={refetch}/>}
       </Flex>
       <Flex
         direction='column'

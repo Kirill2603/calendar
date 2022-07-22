@@ -15,7 +15,7 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek , calendarActiveDate})
   const day = startOfWeek.clone().subtract(1, 'day')
   const daysArray: Moment[] = [...Array(totalDays)].map(() => day.add(1, 'day').clone())
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  const { data, isLoading, isError } = useGetEventsForMonthQuery({ start: daysArray[0], end: daysArray[41] })
+  const { data, isLoading, isError, refetch } = useGetEventsForMonthQuery({ start: daysArray[0], end: daysArray[41] })
 
   return (
     <Grid
@@ -44,6 +44,7 @@ export const Calendar: FC<CalendarProps> = ({ startOfWeek , calendarActiveDate})
           width='full'
           key={day.unix()}>
             <CalendarCell
+              refetch={refetch}
               isDayOff={day.day() === 6 || day.day() === 0}
               isActiveDay={day.format('DDMMYYY') === moment().format('DDMMYYY')}
               isThisMonth={day.format('MM') === calendarActiveDate.format('MM')}
