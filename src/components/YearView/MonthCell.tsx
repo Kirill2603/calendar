@@ -18,7 +18,7 @@ export const MonthCell: FC<MonthCellProps> = ({calendarActiveDate, month}) => {
 
   return (
     <GridItem>
-      <Heading size='lg'>{month}</Heading>
+      <Heading p={4} size='lg'>{month}</Heading>
       <Grid
         height='full'
         templateRows='auto repeat(6, 1fr)'
