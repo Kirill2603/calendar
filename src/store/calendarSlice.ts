@@ -6,11 +6,13 @@ moment.updateLocale('en', { week: { dow: 1 } })
 type CalendarState = {
   calendarActiveDate: Moment,
   miniCalendarActiveDate: Moment
+  activeView: 'day' | 'week' | 'month' | 'year'
 }
 
 const initialState: CalendarState = {
   calendarActiveDate: moment(),
-  miniCalendarActiveDate: moment()
+  miniCalendarActiveDate: moment(),
+  activeView: 'month'
 }
 
 export const calendarSlice = createSlice({
@@ -38,8 +40,11 @@ export const calendarSlice = createSlice({
       if (action.payload.type === 'today') {
         state.miniCalendarActiveDate = moment()
       }
+    },
+    setActiveView: (state, action: PayloadAction<{type: 'day' | 'week' | 'month' | 'year'}>) => {
+      state.activeView = action.payload.type
     }
   }
 })
 
-export const { setCalendarActiveDate, setMiniCalendarActiveDate} = calendarSlice.actions
+export const { setCalendarActiveDate, setMiniCalendarActiveDate, setActiveView} = calendarSlice.actions

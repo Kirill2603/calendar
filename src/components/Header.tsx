@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
   Button,
   ButtonGroup,
@@ -10,20 +10,30 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { AddIcon, SearchIcon, SunIcon } from '@chakra-ui/icons'
+import { useAppDispatch } from '../store/store'
+import { setActiveView } from '../store/calendarSlice'
 
-export const Header = () => {
+type HeaderProps = {
+  activeView: 'day' | 'week' | 'month' | 'year'
+}
+
+export const Header: FC<HeaderProps> = ({activeView}) => {
 
   const { colorMode, toggleColorMode } = useColorMode()
-  
+  const dispatch = useAppDispatch()
+  const onSetActiveView = (type: 'day' | 'week' | 'month' | 'year' ) => {
+    dispatch(setActiveView({ type }))
+  }
+
   return (
     <header>
       <Flex justify='space-between' p={2}>
         <IconButton aria-label="add" icon={<AddIcon/>}/>
         <ButtonGroup size='md' isAttached variant='outline'>
-          <Button>Day</Button>
-          <Button>Week</Button>
-          <Button>Month</Button>
-          <Button>Year</Button>
+          <Button colorScheme={activeView === 'day' ? 'blue' : ''} variant={activeView === 'day' ? 'solid' : 'outline'} onClick={() => onSetActiveView('day')}>Day</Button>
+          <Button colorScheme={activeView === 'week' ? 'blue' : ''} variant={activeView === 'week' ? 'solid' : 'outline'} onClick={() => onSetActiveView('week')}>Week</Button>
+          <Button colorScheme={activeView === 'month' ? 'blue' : ''} variant={activeView === 'month' ? 'solid' : 'outline'} onClick={() => onSetActiveView('month')}>Month</Button>
+          <Button colorScheme={activeView === 'year' ? 'blue' : ''} variant={activeView === 'year' ? 'solid' : 'outline'} onClick={() => onSetActiveView('year')}>Year</Button>
         </ButtonGroup>
         <ButtonGroup size='md' isAttached variant='outline'>
           <InputGroup>
