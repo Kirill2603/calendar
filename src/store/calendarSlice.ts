@@ -4,7 +4,7 @@ import moment, { Moment } from 'moment'
 moment.updateLocale('en', { week: { dow: 1 } })
 
 type CalendarState = {
-  calendarActiveDate: Moment,
+  calendarActiveDate: Moment
   miniCalendarActiveDate: Moment
   activeView: 'day' | 'week' | 'month' | 'year'
 }
@@ -12,14 +12,17 @@ type CalendarState = {
 const initialState: CalendarState = {
   calendarActiveDate: moment(),
   miniCalendarActiveDate: moment(),
-  activeView: 'month'
+  activeView: 'month',
 }
 
 export const calendarSlice = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-    setCalendarActiveDate: (state, action: PayloadAction<{type: 'next' | 'prev' | 'today'}>) => {
+    setMonthCalendarActiveDate: (
+      state,
+      action: PayloadAction<{ type: 'next' | 'prev' | 'today' }>,
+    ) => {
       if (action.payload.type === 'next') {
         state.calendarActiveDate = state.calendarActiveDate.clone().add(1, 'month')
       }
@@ -30,21 +33,51 @@ export const calendarSlice = createSlice({
         state.calendarActiveDate = moment()
       }
     },
-    setMiniCalendarActiveDate: (state, action: PayloadAction<{type: 'next' | 'prev' | 'today'}>) => {
+    setYearCalendarActiveDate: (
+      state,
+      action: PayloadAction<{ type: 'next' | 'prev' | 'today' }>,
+    ) => {
       if (action.payload.type === 'next') {
-        state.miniCalendarActiveDate = state.miniCalendarActiveDate.clone().add(1, 'month')
+        state.calendarActiveDate = state.calendarActiveDate.clone().add(1, 'year')
       }
       if (action.payload.type === 'prev') {
-        state.miniCalendarActiveDate = state.miniCalendarActiveDate.clone().subtract(1, 'month')
+        state.calendarActiveDate = state.calendarActiveDate.clone().subtract(1, 'year')
+      }
+      if (action.payload.type === 'today') {
+        state.calendarActiveDate = moment()
+      }
+    },
+
+    setMiniCalendarActiveDate: (
+      state,
+      action: PayloadAction<{ type: 'next' | 'prev' | 'today' }>,
+    ) => {
+      if (action.payload.type === 'next') {
+        state.miniCalendarActiveDate = state.miniCalendarActiveDate
+          .clone()
+          .add(1, 'month')
+      }
+      if (action.payload.type === 'prev') {
+        state.miniCalendarActiveDate = state.miniCalendarActiveDate
+          .clone()
+          .subtract(1, 'month')
       }
       if (action.payload.type === 'today') {
         state.miniCalendarActiveDate = moment()
       }
     },
-    setActiveView: (state, action: PayloadAction<{type: 'day' | 'week' | 'month' | 'year'}>) => {
+    setActiveView: (
+      state,
+      action: PayloadAction<{ type: 'day' | 'week' | 'month' | 'year' }>,
+    ) => {
       state.activeView = action.payload.type
-    }
-  }
+    },
+  },
 })
 
-export const { setCalendarActiveDate, setMiniCalendarActiveDate, setActiveView} = calendarSlice.actions
+export const {
+  setMonthCalendarActiveDate,
+  setYearCalendarActiveDate,
+  setMiniCalendarActiveDate,
+  setActiveView,
+} = calendarSlice.actions
