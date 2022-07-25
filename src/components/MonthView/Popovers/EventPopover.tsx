@@ -4,7 +4,7 @@ import {
   PopoverTrigger,
 } from '@chakra-ui/react'
 import moment, { Moment } from 'moment'
-import { Event } from '../store/eventsSlice'
+import { Event } from 'store/eventsSlice'
 import { AddEventPopoverBody } from './AddEventPopoverBody'
 import { WithEventPopoverBody } from './WithEventPopoverBody'
 

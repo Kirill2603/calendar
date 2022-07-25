@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { Alert, Button, Checkbox, CloseButton, Flex, Heading, PopoverBody, Text } from '@chakra-ui/react'
+import { Alert, Button, CloseButton, Flex, Heading, PopoverBody, Text } from '@chakra-ui/react'
 import moment from 'moment'
-import { Event } from '../store/eventsSlice'
+import { Event } from 'store/eventsSlice'
 
 type WithEventPopoverBodyProps = {
   events: Event[]
@@ -22,7 +22,7 @@ export const WithEventPopoverBody: FC<WithEventPopoverBodyProps> = ({ events, se
             fontSize='1rem'
             colorScheme={event.color}
             key={event._id}>
-            <Flex direction='row' justify='space-between' align='center' w='full'>
+            <Flex direction='row' justify='space-between' align='center' w='full' cursor='pointer'>
                 {
                   (event.start && event.end)
                     ?
@@ -31,13 +31,10 @@ export const WithEventPopoverBody: FC<WithEventPopoverBodyProps> = ({ events, se
                       <Text>{(event.start && event.end) && moment(event.end).format('kk : mm')}</Text>
                     </Flex>
                     :
-                    <Text px={2}>All day</Text>
+                    <Text px={2} w='full'>All day</Text>
                 }
               <Heading size='md'>{event.title}</Heading>
-              <Flex>
-                <Checkbox px={3} isChecked={event.is_done}>Done</Checkbox>
-                <CloseButton size='sm' />
-              </Flex>
+              <CloseButton />
             </Flex>
           </Alert>,
         )}
