@@ -11,9 +11,9 @@ import {
 import {  ChatIcon, Icon } from '@chakra-ui/icons'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import moment from 'moment'
-import { Event, useAddEventMutation } from '../store/eventsSlice'
+import { Event, useAddEventMutation } from '../../../store/eventsSlice'
 import { ColorsPopover } from './ColorPopover'
-import { TimePicker } from './TimePicker'
+import { TimePicker } from '../../TimePicker'
 
 
 type AddEventPopoverBodyProps = {
