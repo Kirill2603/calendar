@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Flex, Heading, IconButton } from '@chakra-ui/react'
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 import React, { FC } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 import { setYearCalendarActiveDate } from 'store/calendarSlice'
@@ -21,7 +21,7 @@ export const YearNavigate: FC<YearNavigateProps> = ({ calendarActiveDate }) => {
       <Heading>{calendarActiveDate.format('YYYY')} Year</Heading>
       <ButtonGroup size='sm' isAttached variant='outline'>
         <IconButton onClick={() => onSetMonth('prev')} aria-label='prev' icon={<FaAngleLeft />} />
-        <Button onClick={() => onSetMonth('today')}>{calendarActiveDate.format('YYYY')}</Button>
+        <Button onClick={() => onSetMonth('today')}>{moment().format('YYYY')}</Button>
         <IconButton onClick={() => onSetMonth('next')} aria-label='prev' icon={<FaAngleRight />} />
       </ButtonGroup>
     </Flex>
