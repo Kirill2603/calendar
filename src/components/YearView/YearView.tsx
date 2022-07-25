@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
-import { Grid, GridItem, Heading } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 import moment, { Moment } from 'moment'
 import { MonthCell } from './MonthCell'
+import { YearNavigate } from './YearNavigate'
 
 type YearViewProps = {
   calendarActiveDate: Moment
@@ -14,9 +15,9 @@ export const YearView: FC<YearViewProps> = ({ calendarActiveDate }) => {
 
   return (
     <>
-      <Heading px={5}>{calendarActiveDate.format('YYYY')} Year</Heading>
+      <YearNavigate calendarActiveDate={calendarActiveDate}/>
       <Grid
-        p={5}
+        px={5}
         height='full'
         justifyContent='center'
         alignContent='center'

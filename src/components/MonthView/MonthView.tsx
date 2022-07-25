@@ -6,10 +6,11 @@ import { MonthCell } from './MonthCell/MonthCell'
 
 type MonthViewProps = {
   calendarActiveDate: Moment
-  startOfWeek: Moment
 }
 
-export const MonthView: FC<MonthViewProps> = ({ startOfWeek, calendarActiveDate }) => {
+export const MonthView: FC<MonthViewProps> = ({ calendarActiveDate }) => {
+
+  const startOfWeek = calendarActiveDate.clone().startOf('month').startOf('week')
   const totalDays = 42
   const day = startOfWeek.clone().subtract(1, 'day')
   const daysArray: Moment[] = [...Array(totalDays)].map(() => day.add(1, 'day').clone())
