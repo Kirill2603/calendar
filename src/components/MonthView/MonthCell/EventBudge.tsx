@@ -12,26 +12,6 @@ type EventBudgeProps = {
 export const EventBudge: FC<EventBudgeProps> = ({ event, refetch }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [currentEvent, setCurrentEvent] = useState<Event>(event)
-
-  const [updateEvent, updateResult] = useUpdateEventMutation()
-
-  const [deleteEvent, deleteResult] = useDeleteEventMutation()
-
-  const onClickDelete = async () => {
-    if (event._id) {
-      await deleteEvent(event._id)
-    }
-    await refetch()
-    onClose()
-  }
-
-  const onClickSave = async () => {
-    await updateEvent(currentEvent)
-    await refetch()
-    onClose()
-  }
-
   return (
     <>
       <Badge
@@ -47,13 +27,11 @@ export const EventBudge: FC<EventBudgeProps> = ({ event, refetch }) => {
       </Badge>
       {isOpen && (
         <EventModal
-          onClickSave={onClickSave}
-          onClickDelete={onClickDelete}
-          currentEvent={currentEvent}
+          event={event}
+          refetch={refetch}
           isOpen={isOpen}
           onClose={onClose}
           onOpen={onOpen}
-          setCurrentEvent={setCurrentEvent}
         />
       )}
     </>

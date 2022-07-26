@@ -15,29 +15,48 @@ import {
 } from '@chakra-ui/react'
 import { TimePicker } from 'components/TimePicker'
 import moment from 'moment'
-import { Event } from 'store/eventsSlice'
-import React, { FC } from 'react'
-import { ColorsPopover } from '../Popovers/ColorPopover'
+import { Event, useDeleteEventMutation, useUpdateEventMutation } from 'store/eventsSlice'
+import React, { FC, useState } from 'react'
+import { ColorsPopover } from '../../Popovers/ColorPopover'
 
 type EventModalProps = {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
-  currentEvent: Event
-  setCurrentEvent: (currentEvent: Event) => void
-  onClickSave: () => void
-  onClickDelete: () => void
+  refetch: () => void
+  event: Event
 }
 
 export const EventModal: FC<EventModalProps> = ({
+  event,
   isOpen,
   onOpen,
   onClose,
-  currentEvent,
-  setCurrentEvent,
-  onClickDelete,
-  onClickSave,
+  refetch
 }) => {
+
+  const [currentEvent, setCurrentEvent] = useState<Event>(event)
+
+  const [updateEvent, updateResult] = useUpdateEventMutation()
+
+  const [deleteEvent, deleteResult] = useDeleteEventMutation()
+
+  const onClickDelete = async () => {
+    if (event._id) {
+      await deleteEvent(event._id)
+    }
+    await refetch()
+    onClose()
+  }
+
+  const onClickSave = async () => {
+    await updateEvent(currentEvent)
+    await refetch()
+    onClose()
+  }
+
+  console.log('123')
+
   return (
     <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
       <ModalOverlay />
