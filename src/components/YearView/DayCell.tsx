@@ -1,7 +1,7 @@
 import { Button, Popover, useDisclosure } from '@chakra-ui/react'
 import { EventPopover } from 'components/Popovers/EventPopover'
 import moment, { Moment } from 'moment'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { FaEllipsisV } from 'react-icons/fa'
 import { Event } from 'store/eventsSlice'
 
@@ -25,7 +25,11 @@ export const DayCell: FC<DayCellProps> = ({ day, events, refetch }) => {
           moment().format('DDMMYYYY') === day.format('DDMMYYYY') ? 'solid' : 'ghost'
         }
         colorScheme={
-          moment().format('DDMMYYYY') === day.format('DDMMYYYY') ? 'red' : events && events?.length > 0 ? 'green' : 'gray'
+          moment().format('DDMMYYYY') === day.format('DDMMYYYY')
+            ? 'red'
+            : events && events?.length > 0
+            ? 'green'
+            : 'gray'
         }
         size='sm'>
         {day.format('D')}

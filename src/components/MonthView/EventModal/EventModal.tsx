@@ -55,8 +55,6 @@ export const EventModal: FC<EventModalProps> = ({
     onClose()
   }
 
-  console.log('123')
-
   return (
     <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
       <ModalOverlay />

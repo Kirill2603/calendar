@@ -1,6 +1,12 @@
 import React, { FC, useState } from 'react'
 import {
-  Button, Center, Popover, PopoverArrow, PopoverCloseButton, PopoverContent, PopoverHeader,
+  Button,
+  Center,
+  Popover,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
   PopoverTrigger,
 } from '@chakra-ui/react'
 import moment, { Moment } from 'moment'
@@ -16,21 +22,25 @@ type DatePopoverProps = {
   refetch: () => void
 }
 
-export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpen, refetch }) => {
-
+export const EventPopover: FC<DatePopoverProps> = ({
+  day,
+  events,
+  onClose,
+  isOpen,
+  refetch,
+}) => {
   const [createMode, setCreateMod] = useState(false)
 
   return (
-    <Popover placement='right'
-             returnFocusOnClose={false}
-             isOpen={isOpen}
-             onClose={onClose}
-    >
+    <Popover
+      placement='right'
+      returnFocusOnClose={false}
+      isOpen={isOpen}
+      onClose={onClose}
+      closeOnBlur={false}
+>
       <PopoverTrigger>
-        <Button
-          opacity='0.1'
-          variant='ghost'
-          position='absolute'></Button>
+        <Button opacity='0.1' variant='ghost' position='absolute'></Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
@@ -41,9 +51,20 @@ export const EventPopover: FC<DatePopoverProps> = ({ day, events, onClose, isOpe
         </PopoverHeader>
         <PopoverCloseButton />
 
-        {((events && events.length === 0) || createMode)  && < AddEventPopoverBody eventDate={Number(moment(day).format('x'))} onClose={onClose} refetch={refetch}/> }
-        {(events && events.length > 0 && !createMode) && <WithEventPopoverBody events={events} setCreateMod={setCreateMod} refetch={refetch}/>}
-
+        {((events && events.length === 0) || createMode) && (
+          <AddEventPopoverBody
+            eventDate={Number(moment(day).format('x'))}
+            onClose={onClose}
+            refetch={refetch}
+          />
+        )}
+        {events && events.length > 0 && !createMode && (
+          <WithEventPopoverBody
+            events={events}
+            setCreateMod={setCreateMod}
+            refetch={refetch}
+          />
+        )}
       </PopoverContent>
     </Popover>
   )
