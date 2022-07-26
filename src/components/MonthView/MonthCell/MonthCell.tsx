@@ -1,16 +1,10 @@
 import React, { FC } from 'react'
-import {
-  Button,
-  Flex,
-  useDisclosure,
-} from '@chakra-ui/react'
-import {
-  Event,
-} from '../../../store/eventsSlice'
+import { Button, Flex, useDisclosure } from '@chakra-ui/react'
+import { Event } from '../../../store/eventsSlice'
 import moment, { Moment } from 'moment'
 
 import { EventBudge } from './EventBudge'
-import { EventPopover } from '../Popovers/EventPopover'
+import { EventPopover } from '../../Popovers/EventPopover'
 
 type MonthCellProps = {
   day: Moment
@@ -66,5 +60,3 @@ export const MonthCell: FC<MonthCellProps> = ({
     </Flex>
   )
 }
-
-

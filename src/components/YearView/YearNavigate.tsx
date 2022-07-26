@@ -21,7 +21,7 @@ export const YearNavigate: FC<YearNavigateProps> = ({ calendarActiveDate }) => {
       <Heading>{calendarActiveDate.format('YYYY')} Year</Heading>
       <ButtonGroup size='sm' isAttached variant='outline'>
         <IconButton onClick={() => onSetMonth('prev')} aria-label='prev' icon={<FaAngleLeft />} />
-        <Button onClick={() => onSetMonth('today')}>{moment().format('YYYY')}</Button>
+        <Button onClick={() => onSetMonth('today')}>This year</Button>
         <IconButton onClick={() => onSetMonth('next')} aria-label='prev' icon={<FaAngleRight />} />
       </ButtonGroup>
     </Flex>
