@@ -1,7 +1,0 @@
-.monthGrid {
-    @apply grid grid-cols-7
-
-}
-.today {
-      @apply bg-red-500
-}
