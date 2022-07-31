@@ -1,83 +1,45 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import moment, { Moment } from 'moment'
-
-moment.updateLocale('en', { week: { dow: 1 } })
+import dayjs, { Dayjs } from 'dayjs'
 
 type CalendarState = {
-  calendarActiveDate: Moment
-  miniCalendarActiveDate: Moment
-  activeView: 'day' | 'week' | 'month' | 'year'
+  today: Dayjs
+  activeDate: Dayjs
+  monthDays: Dayjs[]
+}
+
+const getDaysForMonth = (month: number) => {
+  console.log(month)
+  const starOfMonthGrid = dayjs().set('date', 1).set('month', month).startOf('week').add(1, 'day').clone()
+  let i = 0
+  return [...Array(42)].map(() => starOfMonthGrid.add(i++, 'day'))
 }
 
 const initialState: CalendarState = {
-  calendarActiveDate: moment(),
-  miniCalendarActiveDate: moment(),
-  activeView: 'month',
+  today: dayjs(),
+  activeDate: dayjs().clone(),
+  monthDays: getDaysForMonth(dayjs().get('month'))
 }
 
 export const calendarSlice = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-    setMonthCalendarActiveDate: (
-      state,
-      action: PayloadAction<{ type: 'next' | 'prev' | 'today' }>,
-    ) => {
-      if (action.payload.type === 'next') {
-        state.calendarActiveDate = state.calendarActiveDate.clone().add(1, 'month')
+    setMonth: (state, action: PayloadAction<'next' | 'prev' | 'today'>) => {
+      if (action.payload === 'next') {
+        console.log(state.activeDate)
+        state.activeDate = state.activeDate.add(1, 'month').clone()
+        state.monthDays = getDaysForMonth(state.activeDate.get('month'))
       }
-      if (action.payload.type === 'prev') {
-        state.calendarActiveDate = state.calendarActiveDate.clone().subtract(1, 'month')
+      if (action.payload === 'prev') {
+        state.activeDate = state.activeDate.add(-1, 'month').clone()
+        state.monthDays = getDaysForMonth(state.activeDate.get('month'))
       }
-      if (action.payload.type === 'today') {
-        state.calendarActiveDate = moment()
+      if (action.payload === 'today') {
+        state.activeDate = dayjs()
+        state.monthDays = getDaysForMonth(state.activeDate.get('month'))
       }
-    },
-    setYearCalendarActiveDate: (
-      state,
-      action: PayloadAction<{ type: 'next' | 'prev' | 'today' }>,
-    ) => {
-      if (action.payload.type === 'next') {
-        state.calendarActiveDate = state.calendarActiveDate.clone().add(1, 'year')
-      }
-      if (action.payload.type === 'prev') {
-        state.calendarActiveDate = state.calendarActiveDate.clone().subtract(1, 'year')
-      }
-      if (action.payload.type === 'today') {
-        state.calendarActiveDate = moment()
-      }
-    },
-
-    setMiniCalendarActiveDate: (
-      state,
-      action: PayloadAction<{ type: 'next' | 'prev' | 'today' }>,
-    ) => {
-      if (action.payload.type === 'next') {
-        state.miniCalendarActiveDate = state.miniCalendarActiveDate
-          .clone()
-          .add(1, 'month')
-      }
-      if (action.payload.type === 'prev') {
-        state.miniCalendarActiveDate = state.miniCalendarActiveDate
-          .clone()
-          .subtract(1, 'month')
-      }
-      if (action.payload.type === 'today') {
-        state.miniCalendarActiveDate = moment()
-      }
-    },
-    setActiveView: (
-      state,
-      action: PayloadAction<{ type: 'day' | 'week' | 'month' | 'year' }>,
-    ) => {
-      state.activeView = action.payload.type
     },
   },
 })
 
-export const {
-  setMonthCalendarActiveDate,
-  setYearCalendarActiveDate,
-  setMiniCalendarActiveDate,
-  setActiveView,
-} = calendarSlice.actions
+export const { setMonth } = calendarSlice.actions
