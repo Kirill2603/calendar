@@ -15,7 +15,7 @@ const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
     <li
       className={`bg-neutral-800 flex flex-col justify-start font-semibold w-full text-lg
             ${!day.isSame(activeDate, 'month') ? 'text-neutral-500' : ''}
-            ${(day.day() === 6 || day.day() === 0) ? 'bg-neutral-700' : ''}`}
+            ${(day.day() === 6 || day.day() === 0) ? 'bg-opacity-80' : ''}`}
     >
       <div className='w-full flex flex-row justify-end'>
         <button
