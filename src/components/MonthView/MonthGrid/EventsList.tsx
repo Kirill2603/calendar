@@ -41,7 +41,7 @@ const EventBudge: FC<EventBudgeProps> = ({ event }) => {
           color={event.color}
           title={dayjs(event.date).format('DD MMMM YYYY')}
           onClose={() => setActive(false)}>
-          <ModalWithEvent event={event}/>
+          <ModalWithEvent event={event} onClose={() => setActive(false)}/>
         </Modal>}
     </>
   )

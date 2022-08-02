@@ -3,8 +3,9 @@ import React, { FC } from 'react'
 type InputProps = {
   value: string | undefined
   placeholder?: string
-  onChange?: (value: string) => {}
+  onChange?: (value: string) => void
 }
+
 
 const Input: FC<InputProps> = ({ value, placeholder, onChange }) => {
 
