@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { Dayjs } from 'dayjs'
 
 export type Event = {
   _id?: string,
   title: string,
   description?: string,
   is_done?: boolean,
-  color?: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
+  color: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
   priority?: 'low' | 'middle' | 'high'
   date: number
   start?: number
@@ -24,9 +25,9 @@ export const eventsApi = createApi({
     getEventById: builder.query<Event, string>({
       query: (id) => `events/${id}`,
     }),
-    // getEventsForMonth: builder.query<Event[], { start: Moment, end: Moment }>({
-    //   query: ({ start, end }) => `events?start=${ start.format("x") }&end=${ end.format("x") }`,
-    // }),
+    getEventsForMonth: builder.query<Event[], { start: Dayjs, end: Dayjs }>({
+      query: ({ start, end }) => `events?start=${ start.unix()*1000 }&end=${ end.unix()*1000 }`,
+    }),
     addEvent: builder.mutation<Event, Event>({
       query: (newEvent) => ({
         url: `/events`,
@@ -56,4 +57,5 @@ export const {
   useUpdateEventMutation,
   useAddEventMutation,
   useDeleteEventMutation,
+  useGetEventsForMonthQuery
 } = eventsApi
