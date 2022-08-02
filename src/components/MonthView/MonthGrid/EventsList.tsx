@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import { Event } from 'store/eventsSlice'
 import Modal from '../../Modal/Modal'
 import dayjs from 'dayjs'
+import ModalWithEvent from '../../Modal/ModalWithEvent'
 
 type EventListProps = {
   events: Event[] | undefined
@@ -9,17 +10,10 @@ type EventListProps = {
 
 const EventsList: FC<EventListProps> = ({ events }) => {
 
-
   return (
     <ul className=''>
       {events?.map(event =>
-        <li
-          key={event._id}
-          className={`bg-${event.color}-700 text-${event.color}-200 px-2 mb-1 ml-2 rounded-l text-sm font-bold`}>
-          <>
-            <EventBudge event={event} />
-          </>
-        </li>,
+        <EventBudge key={event._id} event={event} />,
       )}
     </ul>
   )
@@ -37,8 +31,18 @@ const EventBudge: FC<EventBudgeProps> = ({ event }) => {
 
   return (
     <>
-      <span onClick={() => setActive(true)} className='block relative'>{event.title.toUpperCase()}</span>
-      {active && <Modal color={event.color} title={dayjs(event.date).format('DD MMMM YYYY')} onClose={() => setActive(false)}/>}
+      <li
+        onClick={() => setActive(true)}
+        className={`bg-${event.color}-700 text-${event.color}-200 px-2 mb-1 ml-2 rounded-l text-sm font-bold cursor-pointer`}>
+        {event.title.toUpperCase()}
+      </li>
+      {active &&
+        <Modal
+          color={event.color}
+          title={dayjs(event.date).format('DD MMMM YYYY')}
+          onClose={() => setActive(false)}>
+          <ModalWithEvent event={event}/>
+        </Modal>}
     </>
   )
 }
