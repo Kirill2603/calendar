@@ -20,7 +20,7 @@ const Modal: FC<ModalProps> = ({ onClose, title, color, children }) => {
       <div
         onClick={(event) => event.stopPropagation()}
         className='border border-neutral-500 bg-neutral-800 rounded min-w-fit min-h-fit block text-neutral-50 text-base'>
-        <div className={`flex flex-row justify-between border-b border-neutral-500 px-2 bg-${color}-700`}>
+        <div className={`flex flex-row justify-between border-b border-neutral-500 px-2 bg-${color}-400`}>
           <span></span>
           <span>{title}</span>
           <button onClick={onClickOutside}>X</button>
