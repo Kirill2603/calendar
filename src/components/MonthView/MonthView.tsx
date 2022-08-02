@@ -13,8 +13,6 @@ const MonthView = () => {
       <MonthNav activeDate={activeDate}/>
       <MonthGrid today={today} activeDate={activeDate} monthDays={monthDays} />
     </main>
-
-
   )
 }
 

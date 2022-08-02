@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-neutral-700 text-neutral-50 h-screen w-screen
+    @apply bg-neutral-800 text-neutral-50 h-screen w-screen
 }
 
 #root {

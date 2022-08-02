@@ -8,7 +8,6 @@ type CalendarState = {
 }
 
 const getDaysForMonth = (month: number) => {
-  console.log(month)
   const starOfMonthGrid = dayjs().set('date', 1).set('month', month).startOf('week').add(1, 'day').clone()
   let i = 0
   return [...Array(42)].map(() => starOfMonthGrid.add(i++, 'day'))
