@@ -4,6 +4,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
 import { useAppSelector } from '../../store/store'
+import ColorPiker from '../UI/ColorPiker'
 
 type ModalWithEventProps = {
   event: Event
@@ -34,19 +35,18 @@ const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
   }
 
   return (
-    <div className='p-2'>
-      <div>
-        <Input
-          onChange={value => setCurrentEvent({ ...currentEvent, title: value })}
-          value={currentEvent.title}
-          placeholder={'Title'} />
-      </div>
-      <div>
-        <Input
-          onChange={value => setCurrentEvent({ ...currentEvent, description: value })}
-          value={currentEvent.description}
-          placeholder={'Description'} />
-      </div>
+    <div className='p-2 flex flex-col '>
+      <ColorPiker activeColor={currentEvent.color} onChangeColor={color => setCurrentEvent({ ...currentEvent, color })}/>
+      <span>Title:</span>
+      <Input
+        onChange={value => setCurrentEvent({ ...currentEvent, title: value })}
+        value={currentEvent.title}
+        placeholder={'Title'} />
+      <span>Description:</span>
+      <Input
+        onChange={value => setCurrentEvent({ ...currentEvent, description: value })}
+        value={currentEvent.description}
+        placeholder={'Description'} />
       <div>start: {currentEvent.start}</div>
       <div>end: {currentEvent.end}</div>
       <div>priority: {currentEvent.priority}</div>
@@ -54,8 +54,10 @@ const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
       <div>isDone: {currentEvent.is_done ? 'true' : 'false'}</div>
       <EventTimeLine start={dayjs(currentEvent.start)} end={dayjs(currentEvent.end)} />
 
-      <Button colorScheme={'red'} onClick={onClickDelete}>Delete</Button>
-      <Button colorScheme={'green'} onClick={onClickSave}>Save</Button>
+      <div className='flex flex-row justify-between'>
+        <Button colorScheme={'red'} onClick={onClickDelete}>Delete</Button>
+        <Button colorScheme={'green'} onClick={onClickSave}>Save</Button>
+      </div>
     </div>
   )
 }
