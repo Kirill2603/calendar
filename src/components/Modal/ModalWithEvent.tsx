@@ -5,6 +5,7 @@ import Button from '../UI/Button'
 import Input from '../UI/Input'
 import { useAppSelector } from '../../store/store'
 import ColorPiker from '../UI/ColorPiker'
+import Priority from '../UI/Priority'
 
 type ModalWithEventProps = {
   event: Event
@@ -35,8 +36,9 @@ const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
   }
 
   return (
-    <div className='p-2 flex flex-col '>
-      <ColorPiker activeColor={currentEvent.color} onChangeColor={color => setCurrentEvent({ ...currentEvent, color })}/>
+    <div className='p-2 flex flex-col bg'>
+      <ColorPiker activeColor={currentEvent.color}
+                  onChangeColor={color => setCurrentEvent({ ...currentEvent, color })} />
       <span>Title:</span>
       <Input
         onChange={value => setCurrentEvent({ ...currentEvent, title: value })}
@@ -47,10 +49,12 @@ const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
         onChange={value => setCurrentEvent({ ...currentEvent, description: value })}
         value={currentEvent.description}
         placeholder={'Description'} />
+      <span>Priority:</span>
+      <Priority
+        priority={currentEvent.priority}
+        onChange={priority => setCurrentEvent({ ...currentEvent, priority })} />
       <div>start: {currentEvent.start}</div>
       <div>end: {currentEvent.end}</div>
-      <div>priority: {currentEvent.priority}</div>
-      <div>color: {currentEvent.color}</div>
       <div>isDone: {currentEvent.is_done ? 'true' : 'false'}</div>
       <EventTimeLine start={dayjs(currentEvent.start)} end={dayjs(currentEvent.end)} />
 

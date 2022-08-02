@@ -15,7 +15,7 @@ const ColorPiker: FC<ColorPikerProps> = ({ activeColor, onChangeColor }) => {
         <li
           key={color}
           onClick={() => onChangeColor(color)}
-          className={`w-10 h-10 bg-${color}-700 
+          className={`w-10 h-10 bg-${color}-400 
           rounded-full ${color===activeColor ? 'ring-2 ring-white ring-offset-1' : ''}
           hover:ring-2 ring-white active:opacity-80`}/>)}
     </ul>

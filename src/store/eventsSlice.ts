@@ -1,13 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Dayjs } from 'dayjs'
 
+export enum Priorities {
+  'low' = 0,
+  'middle' = 1,
+  'high' = 2,
+}
+
 export type Event = {
   _id?: string,
   title: string,
   description?: string,
   is_done?: boolean,
   color: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
-  priority?: 'low' | 'middle' | 'high'
+  priority: Priorities
   date: number
   start?: number
   end?: number
