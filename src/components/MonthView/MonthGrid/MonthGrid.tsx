@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Dayjs } from 'dayjs'
 import { useGetEventsForMonthQuery } from '../../../store/eventsSlice'
-import DayCell from './DayCell/Daycell'
+import DayCell from './Daycell'
 
 type MonthGridProps = {
   today: Dayjs

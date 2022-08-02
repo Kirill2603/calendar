@@ -1,7 +1,7 @@
 import { Event } from 'store/eventsSlice'
 import { Dayjs } from 'dayjs'
 import React, { FC } from 'react'
-import EventsList from './EventsList/EventsList'
+import EventsList from './EventsList'
 
 type DayCellProps = {
   events: Event[] | undefined
