@@ -1,13 +1,14 @@
 import React, { FC } from 'react'
+import { Colors } from '../../store/eventsSlice'
 
 type ColorPikerProps = {
-  activeColor: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
-  onChangeColor: (color: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow') => void
+  activeColor: Colors | undefined
+  onChangeColor: (color: Colors) => void
 }
 
 const ColorPiker: FC<ColorPikerProps> = ({ activeColor, onChangeColor }) => {
 
-  const colors: Array<'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'> = ['red', 'green', 'blue', 'purple','orange', 'yellow']
+  const colors: Colors[] = [Colors.RED, Colors.GREEN, Colors.BLUE, Colors.PURPLE, Colors.ORANGE, Colors.YELLOW]
 
   return (
     <ul className='flex flex-row justify-between'>
@@ -15,9 +16,9 @@ const ColorPiker: FC<ColorPikerProps> = ({ activeColor, onChangeColor }) => {
         <li
           key={color}
           onClick={() => onChangeColor(color)}
-          className={`w-10 h-10 bg-${color}-400 
-          rounded-full ${color===activeColor ? 'ring-2 ring-white ring-offset-1' : ''}
-          hover:ring-2 ring-white active:opacity-80`}/>)}
+          className={`w-10 h-10 bg-${color}-500 mx-1 my-1
+          rounded-full ${color === activeColor ? 'ring-2 ring-white ring-offset-1' : ''}
+          hover:ring-2 ring-white active:opacity-80`} />)}
     </ul>
   )
 }

@@ -1,0 +1,44 @@
+.timeInput[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
+
+ul::-webkit-scrollbar {
+    width: 0;
+}
+
+.time, .timeInput {
+    @apply w-full
+}
+
+.timeInput {
+    @apply text-center bg-neutral-800 border border-neutral-500 rounded py-0.5 outline-none my-0.5
+    focus:ring-2 ring-indigo-500
+    hover:border-neutral-400
+}
+
+.time:hover .dropdown {
+    @apply flex
+}
+
+.time:focus .dropdown {
+    @apply flex
+}
+
+.dropdown {
+    @apply hidden w-fit h-32 flex flex-row justify-around absolute
+    bg-neutral-800 border-b border-l border-r border-neutral-500 rounded-b outline-none
+    focus:ring-2 ring-indigo-500
+    hover:border-neutral-400 ring-2 ring-indigo-500
+}
+
+.dropdown .hours, .minutes {
+    @apply overflow-y-scroll
+}
+.dropdown li {
+    @apply cursor-pointer px-1 hover:bg-blue-500 rounded
+}
+
+.active {
+    @apply  bg-neutral-500 text-neutral-900
+}

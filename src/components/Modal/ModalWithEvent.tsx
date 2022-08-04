@@ -1,11 +1,19 @@
 import React, { FC, useState } from 'react'
-import { Event, useDeleteEventMutation, useGetEventsForMonthQuery, useUpdateEventMutation } from 'store/eventsSlice'
+import {
+  Event,
+  UpdateEventModel,
+  useDeleteEventMutation,
+  useGetEventsForMonthQuery,
+  useUpdateEventMutation,
+} from 'store/eventsSlice'
 import dayjs, { Dayjs } from 'dayjs'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
 import { useAppSelector } from '../../store/store'
 import ColorPiker from '../UI/ColorPiker'
 import Priority from '../UI/Priority'
+import TimePicker from '../UI/TimePicker/TimePicker'
+import { ReactComponent as RightArrowIcon } from 'assets/right-arrow.svg'
 
 type ModalWithEventProps = {
   event: Event
@@ -14,7 +22,18 @@ type ModalWithEventProps = {
 
 const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
 
-  const [currentEvent, setCurrentEvent] = useState<Event>(event)
+  const [currentEvent, setCurrentEvent] = useState<UpdateEventModel>(
+    {
+      _id: event._id,
+      color:event.color,
+      title: event.title,
+      description: event.description,
+      priority: event.priority,
+      is_done:event.is_done,
+      date: dayjs(event.date).unix()*1000,
+      start: dayjs(event.start).unix()*1000,
+      end: dayjs(event.end).unix()*1000,
+  })
 
   const { monthDays } = useAppSelector(state => state.calendar)
   const { refetch } = useGetEventsForMonthQuery({ start: monthDays[0], end: monthDays[41] })
@@ -37,26 +56,36 @@ const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
 
   return (
     <div className='p-2 flex flex-col bg'>
-      <ColorPiker activeColor={currentEvent.color}
-                  onChangeColor={color => setCurrentEvent({ ...currentEvent, color })} />
-      <span>Title:</span>
-      <Input
-        onChange={value => setCurrentEvent({ ...currentEvent, title: value })}
-        value={currentEvent.title}
-        placeholder={'Title'} />
-      <span>Description:</span>
-      <Input
-        onChange={value => setCurrentEvent({ ...currentEvent, description: value })}
-        value={currentEvent.description}
-        placeholder={'Description'} />
-      <span>Priority:</span>
-      <Priority
-        priority={currentEvent.priority}
-        onChange={priority => setCurrentEvent({ ...currentEvent, priority })} />
-      <div>start: {currentEvent.start}</div>
-      <div>end: {currentEvent.end}</div>
-      <div>isDone: {currentEvent.is_done ? 'true' : 'false'}</div>
-      <EventTimeLine start={dayjs(currentEvent.start)} end={dayjs(currentEvent.end)} />
+      <ColorPiker
+        activeColor={currentEvent.color}
+        onChangeColor={color => setCurrentEvent({ ...currentEvent, color })} />
+      <div className='flex flex-col py-2 items-start w-full'>
+        <span>Title:</span>
+        <Input
+          onChange={value => setCurrentEvent({ ...currentEvent, title: value })}
+          value={currentEvent.title}
+          placeholder={'Title'} />
+      </div>
+      <div className='flex flex-col py-2 items-start w-full'>
+        <span>Description:</span>
+        <Input
+          onChange={value => setCurrentEvent({ ...currentEvent, description: value })}
+          value={currentEvent.description}
+          placeholder={'Description'} />
+        <span>Priority:</span>
+      </div>
+
+      <div className='flex flex-col py-2 items-start w-full'>
+        <Priority
+          priority={currentEvent.priority}
+          onChange={priority => setCurrentEvent({ ...currentEvent, priority })} />
+      </div>
+
+      <div className='flex flex-row justify-between py-2'>
+        <TimePicker value={currentEvent.start} onChange={start => setCurrentEvent(({...currentEvent, start}))}/>
+        <RightArrowIcon className='w-10 h-10 fill-amber-50 mx-3'/>
+        <TimePicker value={currentEvent.end} onChange={end => setCurrentEvent(({...currentEvent, end}))}/>
+      </div>
 
       <div className='flex flex-row justify-between'>
         <Button colorScheme={'red'} onClick={onClickDelete}>Delete</Button>

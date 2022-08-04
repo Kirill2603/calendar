@@ -13,7 +13,7 @@ const MonthGrid: FC<MonthGridProps> = ({ today, activeDate, monthDays }) => {
 
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-  const { data: events} = useGetEventsForMonthQuery({ start: monthDays[0], end: monthDays[41] })
+  const { data: events } = useGetEventsForMonthQuery({ start: monthDays[0], end: monthDays[41] })
 
   return (
     <>
