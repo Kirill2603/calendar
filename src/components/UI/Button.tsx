@@ -9,9 +9,9 @@ type ButtonProps = {
 const Button:FC<ButtonProps> = ({children, colorScheme, onClick}) => {
 
   const style = {
-    'red': 'border border-neutral-500 bg-red-500 rounded px-2 py-0.5 my-0.5 hover:bg-red-600 active:bg-red-400',
-    'green': 'border border-neutral-500 bg-green-500 rounded px-2 py-0.5 my-0.5 hover:bg-green-600 active:bg-green-400',
-    'grey': 'border border-neutral-500 bg-neutral-500 rounded px-2 py-0.5 my-0.5 hover:bg-neutral-600 active:bg-neutral-400',
+    'red': 'border border-neutral-500 bg-red-500 text-lg rounded px-2 py-0.5 m-0.5 hover:bg-red-600 active:bg-red-400',
+    'green': 'border border-neutral-500 bg-green-500 text-lg rounded px-2 py-0.5 m-0.5 hover:bg-green-600 active:bg-green-400',
+    'grey': 'border border-neutral-500 bg-neutral-500 text-lg rounded px-2 py-0.5 m-0.5 hover:bg-neutral-600 active:bg-neutral-400',
   }
 
   const onButtonClick = () => {

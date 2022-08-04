@@ -15,12 +15,12 @@ import Priority from '../UI/Priority'
 import TimePicker from '../UI/TimePicker/TimePicker'
 import { ReactComponent as RightArrowIcon } from 'assets/right-arrow.svg'
 
-type ModalWithEventProps = {
+type UpdateEventModalBodyProps = {
   event: Event
   onClose: () => void
 }
 
-const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
+const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onClose }) => {
 
   const [currentEvent, setCurrentEvent] = useState<UpdateEventModel>(
     {
@@ -72,9 +72,8 @@ const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
           onChange={value => setCurrentEvent({ ...currentEvent, description: value })}
           value={currentEvent.description}
           placeholder={'Description'} />
-        <span>Priority:</span>
       </div>
-
+      <span>Priority:</span>
       <div className='flex flex-col py-2 items-start w-full'>
         <Priority
           priority={currentEvent.priority}
@@ -95,7 +94,7 @@ const ModalWithEvent: FC<ModalWithEventProps> = ({ event, onClose }) => {
   )
 }
 
-export default ModalWithEvent
+export default UpdateEventModalBody
 
 type EventTimeLineProps = {
   start: Dayjs
