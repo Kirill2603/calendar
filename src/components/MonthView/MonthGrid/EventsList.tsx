@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Event } from 'store/eventsSlice'
 import Modal from '../../Modal/Modal'
 import dayjs from 'dayjs'
-import ModalWithEvent from '../../Modal/ModalWithEvent'
+import UpdateEventModalBody from 'components/Modal/UpdateEventModalBody'
 
 type EventListProps = {
   events: Event[] | undefined
@@ -41,7 +41,7 @@ const EventBudge: FC<EventBudgeProps> = ({ event }) => {
           color={event.color}
           title={dayjs(event.date).format('DD MMMM YYYY')}
           onClose={() => setActive(false)}>
-          <ModalWithEvent event={event} onClose={() => setActive(false)}/>
+          <UpdateEventModalBody event={event} onClose={() => setActive(false)}/>
         </Modal>}
     </>
   )

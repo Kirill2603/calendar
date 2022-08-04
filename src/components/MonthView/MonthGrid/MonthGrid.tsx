@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { useGetEventsForMonthQuery } from '../../../store/eventsSlice'
 import DayCell from './Daycell'
 
@@ -29,7 +29,7 @@ const MonthGrid: FC<MonthGridProps> = ({ today, activeDate, monthDays }) => {
               day={day}
               activeDate={activeDate}
               today={today}
-              events={events?.filter(event => day.isSame(event.date))} />
+              events={events?.filter(event => day.isSame(event.date, 'date'))} />
         )}
       </ul>
 

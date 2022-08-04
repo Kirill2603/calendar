@@ -40,6 +40,17 @@ export type UpdateEventModel = {
   end?: number
 }
 
+export type CreateEventModel = {
+  title: string,
+  description?: string,
+  is_done?: boolean,
+  color?: Colors
+  priority?: Priorities
+  date: number
+  start?: number
+  end?: number
+}
+
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
   baseQuery: fetchBaseQuery({
@@ -55,7 +66,7 @@ export const eventsApi = createApi({
     getEventsForMonth: builder.query<Event[], { start: Dayjs, end: Dayjs }>({
       query: ({ start, end }) => `events?start=${ start.unix()*1000 }&end=${ end.unix()*1000 }`,
     }),
-    addEvent: builder.mutation<Event, Event>({
+    addEvent: builder.mutation<Event, CreateEventModel>({
       query: (newEvent) => ({
         url: `/events`,
         method: 'POST',
