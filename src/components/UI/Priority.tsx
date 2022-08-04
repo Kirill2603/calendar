@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC } from 'react'
 import { Priorities } from 'store/eventsSlice'
 
 type PriorityProps = {
-  priority: Priorities
+  priority: Priorities | undefined
   onChange: (priority: Priorities) => void
 }
 
@@ -15,7 +15,7 @@ const Priority: FC<PriorityProps> = ({ priority, onChange }) => {
   return (
     <>
       <div
-        className='flex flex-col space-y-2'>
+        className='flex flex-col w-full'>
         <input
           type='range'
           value={priority}

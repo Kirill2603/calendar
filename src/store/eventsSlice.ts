@@ -7,13 +7,34 @@ export enum Priorities {
   'high' = 2,
 }
 
+export enum Colors {
+  RED = 'red',
+  GREEN = 'green',
+  BLUE = 'blue',
+  PURPLE = 'purple',
+  ORANGE = 'orange',
+  YELLOW = 'yellow',
+}
+
 export type Event = {
-  _id?: string,
+  _id: string,
   title: string,
   description?: string,
   is_done?: boolean,
-  color: 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'yellow'
+  color: Colors
   priority: Priorities
+  date: Date
+  start?: Date
+  end?: Date
+}
+
+export type UpdateEventModel = {
+  _id: string,
+  title: string,
+  description?: string,
+  is_done?: boolean,
+  color?: Colors
+  priority?: Priorities
   date: number
   start?: number
   end?: number
@@ -41,7 +62,7 @@ export const eventsApi = createApi({
         body: newEvent,
       }),
     }),
-    updateEvent: builder.mutation<Event, Pick<Event, '_id'> & Partial<Event>>({
+    updateEvent: builder.mutation<Event, Pick<Event, '_id'> & UpdateEventModel>({
       query: ({ _id, ...updatedEvent }) => ({
         url: `/events/${_id}`,
         method: 'PUT',

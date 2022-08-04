@@ -33,7 +33,7 @@ const EventBudge: FC<EventBudgeProps> = ({ event }) => {
     <>
       <li
         onClick={() => setActive(true)}
-        className={`bg-${event.color}-400 text-${event.color}-100 px-2 mb-1 ml-2 rounded-l text-sm font-bold cursor-pointer hover:ml-1`}>
+        className={`bg-${event.color}-500 text-${event.color}-100 px-2 mb-1 ml-2 rounded-l text-sm font-bold cursor-pointer hover:ml-1`}>
         {event.title.toUpperCase()}
       </li>
       {active &&
