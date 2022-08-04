@@ -4,6 +4,7 @@ import React, { FC, useState } from 'react'
 import EventsList from './EventsList'
 import Modal from '../../Modal/Modal'
 import CreateEventModalBody from '../../Modal/CreateEventModalBody'
+import Button from '../../UI/Button'
 
 type DayCellProps = {
   events: Event[] | undefined
@@ -15,6 +16,12 @@ type DayCellProps = {
 const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [isCreateMode, setIsCreateMode] = useState<boolean>(false)
+
+  const onCloseModal = () => {
+    setIsOpenModal(false)
+    setIsCreateMode(false)
+  }
 
   return (
     <li
@@ -28,15 +35,28 @@ const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
           className={`cursor-pointer p-2 m-1 leading-none ${day.isSame(today, 'day') ? 'bg-red-500 rounded-full text-neutral-800' : ''}`}>
           {day.format('DD')}
           {isOpenModal &&
-            <Modal title={day.format('DD MMMM YYYY')} onClose={() => setIsOpenModal(false)}>
+            <Modal title={day.format('DD MMMM YYYY')} onClose={onCloseModal}>
               <>
-                {events?.length === 0 && <CreateEventModalBody day={day} onClose={() => setIsOpenModal(false)}/>}
+                {isCreateMode
+                  ?
+                  <CreateEventModalBody day={day} onClose={onCloseModal} />
+                  :
+                  events?.length === 0 ?
+                    <>
+                      <CreateEventModalBody day={day} onClose={onCloseModal} />
+                    </>
+                    :
+                    <div className='flex flex-col justify-start align-middle items-end p-2'>
+                      <EventsList events={events} type='normal' />
+                      <Button colorScheme='green' onClick={() => setIsCreateMode(true)}>Create</Button>
+                    </div>
+                }
               </>
             </Modal>
           }
         </button>
       </div>
-      <EventsList events={events}/>
+      <EventsList events={events} type='mini' />
     </li>
   )
 }
