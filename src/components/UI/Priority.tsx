@@ -1,12 +1,12 @@
 import React, { ChangeEvent, FC } from 'react'
-import { Priorities } from 'store/eventsSlice'
+import { Priorities } from 'store/types'
 
 type PriorityProps = {
   priority: Priorities | undefined
   onChange: (priority: Priorities) => void
 }
 
-const Priority: FC<PriorityProps> = ({ priority, onChange }) => {
+export const Priority: FC<PriorityProps> = ({ priority, onChange }) => {
 
   const onChangePriority = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(Number(event.currentTarget.value))
@@ -31,5 +31,3 @@ const Priority: FC<PriorityProps> = ({ priority, onChange }) => {
     </>
   )
 }
-
-export default Priority

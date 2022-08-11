@@ -7,7 +7,7 @@ type InputProps = {
 }
 
 
-const Input: FC<InputProps> = ({ value, placeholder, onChange }) => {
+export const Input: FC<InputProps> = ({ value, placeholder, onChange }) => {
 
   const onInputChange = (value: string) => {
     if (onChange) {
@@ -27,5 +27,3 @@ const Input: FC<InputProps> = ({ value, placeholder, onChange }) => {
       type='text' />
   )
 }
-
-export default Input

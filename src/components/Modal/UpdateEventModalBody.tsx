@@ -1,26 +1,21 @@
 import React, { FC, useState } from 'react'
+import { ColorPiker, Button, Priority, Input, TimePicker } from 'components/UI'
 import {
-  Event,
-  UpdateEventModel,
   useDeleteEventMutation,
   useGetEventsForMonthQuery,
   useUpdateEventMutation,
 } from 'store/eventsSlice'
-import dayjs, { Dayjs } from 'dayjs'
-import Button from '../UI/Button'
-import Input from '../UI/Input'
-import { useAppSelector } from '../../store/store'
-import ColorPiker from '../UI/ColorPiker'
-import Priority from '../UI/Priority'
-import TimePicker from '../UI/TimePicker/TimePicker'
+import dayjs from 'dayjs'
+import { useAppSelector } from 'store/store'
 import { ReactComponent as RightArrowIcon } from 'assets/right-arrow.svg'
+import { Event, UpdateEventModel } from 'store/types'
 
 type UpdateEventModalBodyProps = {
   event: Event
   onClose: () => void
 }
 
-const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onClose }) => {
+export const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onClose }) => {
 
   const [currentEvent, setCurrentEvent] = useState<UpdateEventModel>(
     {
@@ -89,27 +84,6 @@ const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onClose })
       <div className='flex flex-row justify-between'>
         <Button colorScheme={'red'} onClick={onClickDelete}>Delete</Button>
         <Button colorScheme={'green'} onClick={onClickSave}>Save</Button>
-      </div>
-    </div>
-  )
-}
-
-export default UpdateEventModalBody
-
-type EventTimeLineProps = {
-  start: Dayjs
-  end: Dayjs
-}
-
-const EventTimeLine: FC<EventTimeLineProps> = ({ start, end }) => {
-  let hour = 0
-  const hours = [...Array(24)].map(() => hour++)
-
-  return (
-    <div>
-      timeline
-      <div className='flex flex-row justify-between'>
-        {hours.map(hour => <div key={hour}>{hour}</div>)}
       </div>
     </div>
   )

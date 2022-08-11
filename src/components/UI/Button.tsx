@@ -6,7 +6,7 @@ type ButtonProps = {
   onClick?: () => void
 }
 
-const Button:FC<ButtonProps> = ({children, colorScheme, onClick}) => {
+export const Button:FC<ButtonProps> = ({children, colorScheme, onClick}) => {
 
   const style = {
     'red': 'border border-neutral-500 bg-red-500 text-lg rounded px-2 py-0.5 m-0.5 hover:bg-red-600 active:bg-red-400',
@@ -26,5 +26,3 @@ const Button:FC<ButtonProps> = ({children, colorScheme, onClick}) => {
     </button>
   )
 }
-
-export default Button

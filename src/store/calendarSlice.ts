@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import dayjs, { Dayjs } from 'dayjs'
-
-type CalendarState = {
-  today: Dayjs
-  activeDate: Dayjs
-  monthDays: Dayjs[]
-}
+import dayjs from 'dayjs'
+import { CalendarState } from './types'
 
 const getDaysForMonth = (month: number) => {
   const starOfMonthGrid = dayjs().set('date', 1).set('month', month).startOf('week').add(1, 'day').clone()
@@ -16,7 +11,7 @@ const getDaysForMonth = (month: number) => {
 const initialState: CalendarState = {
   today: dayjs(),
   activeDate: dayjs().clone(),
-  monthDays: getDaysForMonth(dayjs().get('month'))
+  monthDays: getDaysForMonth(dayjs().get('month')),
 }
 
 export const calendarSlice = createSlice({

@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import { setMonth } from '../../../store/calendarSlice'
 import { useAppDispatch } from '../../../store/store'
 import { Dayjs } from 'dayjs'
-import Button from '../../UI/Button'
+import { Button } from 'components/UI'
 
 type MonthNavProps = {
   activeDate: Dayjs
 }
 
-const MonthNav: FC<MonthNavProps> = ({ activeDate }) => {
+export const MonthNav: FC<MonthNavProps> = ({ activeDate }) => {
 
   const dispatch = useAppDispatch()
 
@@ -33,5 +33,3 @@ const MonthNav: FC<MonthNavProps> = ({ activeDate }) => {
     </div>
   )
 }
-
-export default MonthNav

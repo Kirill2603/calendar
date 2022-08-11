@@ -1,10 +1,9 @@
 import React from 'react'
 import { useAppSelector } from 'store/store'
+import { MonthNav } from './MonthNav/MonthNav'
+import { MonthGrid } from './MonthGrid/MonthGrid'
 
-import MonthGrid from './MonthGrid/MonthGrid'
-import MonthNav from './MonthNav/MonthNav'
-
-const MonthView = () => {
+export const MonthView = () => {
 
   const { today, activeDate, monthDays } = useAppSelector(state => state.calendar)
 
@@ -15,5 +14,3 @@ const MonthView = () => {
     </main>
   )
 }
-
-export default MonthView

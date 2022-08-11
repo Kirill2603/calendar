@@ -1,55 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Dayjs } from 'dayjs'
-
-export enum Priorities {
-  'low' = 0,
-  'middle' = 1,
-  'high' = 2,
-}
-
-export enum Colors {
-  RED = 'red',
-  GREEN = 'green',
-  BLUE = 'blue',
-  PURPLE = 'purple',
-  ORANGE = 'orange',
-  YELLOW = 'yellow',
-}
-
-export type Event = {
-  _id: string,
-  title: string,
-  description?: string,
-  is_done?: boolean,
-  color: Colors
-  priority: Priorities
-  date: Date
-  start?: Date
-  end?: Date
-}
-
-export type UpdateEventModel = {
-  _id: string,
-  title: string,
-  description?: string,
-  is_done?: boolean,
-  color?: Colors
-  priority?: Priorities
-  date: number
-  start?: number
-  end?: number
-}
-
-export type CreateEventModel = {
-  title: string,
-  description?: string,
-  is_done?: boolean,
-  color?: Colors
-  priority?: Priorities
-  date: number
-  start?: number
-  end?: number
-}
+import { Event, CreateEventModel, UpdateEventModel } from './types'
 
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
@@ -64,7 +15,7 @@ export const eventsApi = createApi({
       query: (id) => `events/${id}`,
     }),
     getEventsForMonth: builder.query<Event[], { start: Dayjs, end: Dayjs }>({
-      query: ({ start, end }) => `events?start=${ start.unix()*1000 }&end=${ end.unix()*1000 }`,
+      query: ({ start, end }) => `events?start=${start.unix() * 1000}&end=${end.unix() * 1000}`,
     }),
     addEvent: builder.mutation<Event, CreateEventModel>({
       query: (newEvent) => ({
@@ -95,5 +46,5 @@ export const {
   useUpdateEventMutation,
   useAddEventMutation,
   useDeleteEventMutation,
-  useGetEventsForMonthQuery
+  useGetEventsForMonthQuery,
 } = eventsApi

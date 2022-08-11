@@ -1,20 +1,17 @@
 import React, { FC, useState } from 'react'
-import Button from '../UI/Button'
-import ColorPiker from '../UI/ColorPiker'
-import Input from '../UI/Input'
-import Priority from '../UI/Priority'
-import TimePicker from '../UI/TimePicker/TimePicker'
+import { ColorPiker, Button, Priority, Input, TimePicker } from 'components/UI'
 import { ReactComponent as RightArrowIcon } from '../../assets/right-arrow.svg'
-import { CreateEventModel, Priorities, useAddEventMutation, useGetEventsForMonthQuery } from '../../store/eventsSlice'
+import { useAddEventMutation, useGetEventsForMonthQuery } from '../../store/eventsSlice'
 import dayjs, { Dayjs } from 'dayjs'
 import { useAppSelector } from '../../store/store'
+import { CreateEventModel, Priorities } from '../../store/types'
 
 type CreateEventModalBodyProps = {
   day: Dayjs
   onClose: () => void
 }
 
-const CreateEventModalBody: FC<CreateEventModalBodyProps> = ({ day, onClose }) => {
+export const CreateEventModalBody: FC<CreateEventModalBodyProps> = ({ day, onClose }) => {
 
   const [addEvent, { isLoading }] = useAddEventMutation()
   const { monthDays } = useAppSelector(state => state.calendar)
@@ -76,5 +73,3 @@ const CreateEventModalBody: FC<CreateEventModalBodyProps> = ({ day, onClose }) =
     </div>
   )
 }
-
-export default CreateEventModalBody

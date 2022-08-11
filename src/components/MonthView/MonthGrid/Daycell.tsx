@@ -1,10 +1,10 @@
-import { Event } from 'store/eventsSlice'
 import { Dayjs } from 'dayjs'
 import React, { FC, useState } from 'react'
-import EventsList from './EventsList'
-import Modal from '../../Modal/Modal'
-import CreateEventModalBody from '../../Modal/CreateEventModalBody'
-import Button from '../../UI/Button'
+import { Event } from 'store/types'
+import { Button } from 'components/UI'
+import { CreateEventModalBody } from '../../Modal/CreateEventModalBody'
+import { Modal } from '../../Modal/Modal'
+import { EventsList } from './EventsList'
 
 type DayCellProps = {
   events: Event[] | undefined
@@ -13,7 +13,7 @@ type DayCellProps = {
   activeDate: Dayjs
 }
 
-const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
+export const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isCreateMode, setIsCreateMode] = useState<boolean>(false)
@@ -47,7 +47,7 @@ const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
                     </>
                     :
                     <div className='flex flex-col justify-start align-middle items-end p-2'>
-                      <EventsList events={events} type='normal' />
+                      <EventsList events={events} type='default' />
                       <Button colorScheme='green' onClick={() => setIsCreateMode(true)}>Create</Button>
                     </div>
                 }
@@ -60,5 +60,3 @@ const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
     </li>
   )
 }
-
-export default DayCell

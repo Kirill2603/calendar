@@ -7,7 +7,7 @@ type ModalProps = {
   children: ReactElement
 }
 
-const Modal: FC<ModalProps> = ({ onClose, title, color, children }) => {
+export const Modal: FC<ModalProps> = ({ onClose, title, color, children }) => {
 
   const onClickOutside = () => {
     onClose()
@@ -30,5 +30,3 @@ const Modal: FC<ModalProps> = ({ onClose, title, color, children }) => {
     </div>
   )
 }
-
-export default Modal

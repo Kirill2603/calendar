@@ -1,6 +1,5 @@
 import React from 'react'
-import MonthView from 'components/MonthView/MonthView'
-
+import { MonthView } from './components/MonthView/MonthView'
 
 const App = () => {
 

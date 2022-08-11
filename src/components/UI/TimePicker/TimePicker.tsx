@@ -7,7 +7,7 @@ type TimePickerProps = {
   onChange: (time: number) => void
 }
 
-const TimePicker: FC<TimePickerProps> = ({ value, onChange }) => {
+export const TimePicker: FC<TimePickerProps> = ({ value, onChange }) => {
 
   const [width, setWidth] = useState(0)
 
@@ -57,5 +57,3 @@ const TimePicker: FC<TimePickerProps> = ({ value, onChange }) => {
     </>
   )
 }
-
-export default TimePicker

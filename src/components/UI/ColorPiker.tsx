@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
-import { Colors } from '../../store/eventsSlice'
+import { Colors } from 'store/types'
 
 type ColorPikerProps = {
   activeColor: Colors | undefined
   onChangeColor: (color: Colors) => void
 }
 
-const ColorPiker: FC<ColorPikerProps> = ({ activeColor, onChangeColor }) => {
+export const ColorPiker: FC<ColorPikerProps> = ({ activeColor, onChangeColor }) => {
 
   const colors: Colors[] = [Colors.RED, Colors.GREEN, Colors.BLUE, Colors.PURPLE, Colors.ORANGE, Colors.YELLOW]
 
@@ -22,5 +22,3 @@ const ColorPiker: FC<ColorPikerProps> = ({ activeColor, onChangeColor }) => {
     </ul>
   )
 }
-
-export default ColorPiker

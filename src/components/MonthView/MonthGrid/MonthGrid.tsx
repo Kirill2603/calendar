@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import dayjs, { Dayjs } from 'dayjs'
-import { useGetEventsForMonthQuery } from '../../../store/eventsSlice'
-import DayCell from './Daycell'
+import { Dayjs } from 'dayjs'
+import { useGetEventsForMonthQuery } from 'store/eventsSlice'
+import { DayCell } from './Daycell'
 
 type MonthGridProps = {
   today: Dayjs
@@ -9,7 +9,7 @@ type MonthGridProps = {
   monthDays: Dayjs[]
 }
 
-const MonthGrid: FC<MonthGridProps> = ({ today, activeDate, monthDays }) => {
+export const MonthGrid: FC<MonthGridProps> = ({ today, activeDate, monthDays }) => {
 
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -36,5 +36,3 @@ const MonthGrid: FC<MonthGridProps> = ({ today, activeDate, monthDays }) => {
     </>
   )
 }
-
-export default MonthGrid
