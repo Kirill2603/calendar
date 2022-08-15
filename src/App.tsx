@@ -1,10 +1,14 @@
 import React from 'react'
 import { MonthView } from './components/MonthView/MonthView'
+import { MiniCalendar } from './components/miniCalendar'
 
 const App = () => {
 
   return (
-      <MonthView />
+      <div className='flex flex-row w-full h-full'>
+        <MiniCalendar />
+        <MonthView />
+      </div>
   )
 }
 

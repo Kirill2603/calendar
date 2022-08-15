@@ -14,8 +14,8 @@ type CreateEventModalBodyProps = {
 export const CreateEventModalBody: FC<CreateEventModalBodyProps> = ({ day, onClose }) => {
 
   const [addEvent, { isLoading }] = useAddEventMutation()
-  const { monthDays } = useAppSelector(state => state.calendar)
-  const { refetch } = useGetEventsForMonthQuery({ start: monthDays[0], end: monthDays[41] })
+  const { calendarMonthDays } = useAppSelector(state => state.calendar)
+  const { refetch } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
 
   const [currentEvent, setCurrentEvent] = useState<CreateEventModel>(
     {

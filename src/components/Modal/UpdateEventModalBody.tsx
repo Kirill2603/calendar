@@ -30,8 +30,8 @@ export const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onC
       end: dayjs(event.end).unix()*1000,
   })
 
-  const { monthDays } = useAppSelector(state => state.calendar)
-  const { refetch } = useGetEventsForMonthQuery({ start: monthDays[0], end: monthDays[41] })
+  const { calendarMonthDays } = useAppSelector(state => state.calendar)
+  const { refetch } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
   const [updateEvent, updateResult] = useUpdateEventMutation()
   const [deleteEvent, deleteResult] = useDeleteEventMutation()
 

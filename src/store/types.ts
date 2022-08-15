@@ -52,6 +52,8 @@ export type CreateEventModel = {
 
 export type CalendarState = {
   today: Dayjs
-  activeDate: Dayjs
-  monthDays: Dayjs[]
+  calendarActiveDate: Dayjs
+  miniCalendarActiveDate: Dayjs
+  calendarMonthDays: Dayjs[]
+  miniCalendarMonthDays: Dayjs[]
 }

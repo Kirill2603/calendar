@@ -5,15 +5,15 @@ import { DayCell } from './Daycell'
 
 type MonthGridProps = {
   today: Dayjs
-  activeDate: Dayjs
-  monthDays: Dayjs[]
+  calendarActiveDate: Dayjs
+  calendarMonthDays: Dayjs[]
 }
 
-export const MonthGrid: FC<MonthGridProps> = ({ today, activeDate, monthDays }) => {
+export const MonthGrid: FC<MonthGridProps> = ({ today, calendarActiveDate, calendarMonthDays }) => {
 
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-  const { data: events } = useGetEventsForMonthQuery({ start: monthDays[0], end: monthDays[41] })
+  const { data: events } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
 
   return (
     <>
@@ -23,11 +23,11 @@ export const MonthGrid: FC<MonthGridProps> = ({ today, activeDate, monthDays }) 
         </li>)}
       </ul>
       <ul className='grid grid-cols-7 grid-rows-6 gap-px bg-neutral-500 h-full'>
-        {monthDays.map((day) =>
+        {calendarMonthDays.map((day) =>
             <DayCell
               key={day.unix()}
               day={day}
-              activeDate={activeDate}
+              calendarActiveDate={calendarActiveDate}
               today={today}
               events={events?.filter(event => day.isSame(event.date, 'date'))} />
         )}

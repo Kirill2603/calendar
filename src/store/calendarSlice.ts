@@ -10,30 +10,46 @@ const getDaysForMonth = (month: number) => {
 
 const initialState: CalendarState = {
   today: dayjs(),
-  activeDate: dayjs().clone(),
-  monthDays: getDaysForMonth(dayjs().get('month')),
+  calendarActiveDate: dayjs().clone(),
+  miniCalendarActiveDate: dayjs().clone(),
+  calendarMonthDays: getDaysForMonth(dayjs().get('month')),
+  miniCalendarMonthDays: getDaysForMonth(dayjs().get('month')),
 }
 
 export const calendarSlice = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-    setMonth: (state, action: PayloadAction<'next' | 'prev' | 'today'>) => {
-      if (action.payload === 'next') {
-        console.log(state.activeDate)
-        state.activeDate = state.activeDate.add(1, 'month').clone()
-        state.monthDays = getDaysForMonth(state.activeDate.get('month'))
+    setCalendarMonth: (state, action: PayloadAction<{ target: 'calendar' | 'miniCalendar', action: 'next' | 'prev' | 'today' }>) => {
+      if (action.payload.action === 'today') {
+        if (action.payload.target === 'calendar') {
+          state.calendarActiveDate = dayjs()
+          state.calendarMonthDays = getDaysForMonth(state.calendarActiveDate.get('month'))
+        } else {
+          state.miniCalendarActiveDate = dayjs()
+          state.miniCalendarMonthDays = getDaysForMonth(state.miniCalendarActiveDate.get('month'))
+        }
       }
-      if (action.payload === 'prev') {
-        state.activeDate = state.activeDate.add(-1, 'month').clone()
-        state.monthDays = getDaysForMonth(state.activeDate.get('month'))
+      if (action.payload.action === 'next') {
+        if (action.payload.target === 'calendar') {
+          state.calendarActiveDate = state.calendarActiveDate.add(1, 'month').clone()
+          state.calendarMonthDays = getDaysForMonth(state.calendarActiveDate.get('month'))
+        } else {
+          state.miniCalendarActiveDate = state.miniCalendarActiveDate.add(1, 'month').clone()
+          state.miniCalendarMonthDays = getDaysForMonth(state.miniCalendarActiveDate.get('month'))
+        }
       }
-      if (action.payload === 'today') {
-        state.activeDate = dayjs()
-        state.monthDays = getDaysForMonth(state.activeDate.get('month'))
+      if (action.payload.action === 'prev') {
+        if (action.payload.target === 'calendar') {
+          state.calendarActiveDate = state.calendarActiveDate.add(-1, 'month').clone()
+          state.calendarMonthDays = getDaysForMonth(state.calendarActiveDate.get('month'))
+        } else {
+          state.miniCalendarActiveDate = state.miniCalendarActiveDate.add(-1, 'month').clone()
+          state.miniCalendarMonthDays = getDaysForMonth(state.miniCalendarActiveDate.get('month'))
+        }
       }
-    },
+    }
   },
 })
 
-export const { setMonth } = calendarSlice.actions
+export const { setCalendarMonth } = calendarSlice.actions

@@ -10,10 +10,10 @@ type DayCellProps = {
   events: Event[] | undefined
   day: Dayjs
   today: Dayjs
-  activeDate: Dayjs
+  calendarActiveDate: Dayjs
 }
 
-export const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) => {
+export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, events }) => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isCreateMode, setIsCreateMode] = useState<boolean>(false)
@@ -26,7 +26,7 @@ export const DayCell: FC<DayCellProps> = ({ day, today, activeDate, events }) =>
   return (
     <li
       className={`bg-neutral-800 flex flex-col justify-start font-semibold w-full text-lg
-            ${!day.isSame(activeDate, 'month') ? 'text-neutral-500' : ''}
+            ${!day.isSame(calendarActiveDate, 'month') ? 'text-neutral-500' : ''}
             ${(day.day() === 6 || day.day() === 0) ? 'bg-opacity-80' : ''}`}
     >
       <div className='w-full flex flex-row justify-end'>
