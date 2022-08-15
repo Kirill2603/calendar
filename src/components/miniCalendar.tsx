@@ -27,7 +27,7 @@ export const MiniCalendar = () => {
           </li>)}
         {miniCalendarMonthDays.map(day =>
           <li
-            key={day.unix()+ 'm'}
+            key={day.unix() + 'm'}
             className={`px-2 py-1 text-neutral-300
             ${day.isSame(today, 'day') ? 'bg-red-500 rounded-full text-neutral-900 ' : ''}
             ${!day.isSame(miniCalendarActiveDate, 'month') ? 'text-neutral-700' : ''}`}>

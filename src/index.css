@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 body {
-    @apply bg-neutral-800 text-neutral-50 h-screen w-screen
+    @apply bg-neutral-800 text-neutral-50
 }
 
 #root {
-    @apply h-full h-full
+    @apply h-screen h-screen
 }

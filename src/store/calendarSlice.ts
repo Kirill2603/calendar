@@ -10,6 +10,7 @@ const getDaysForMonth = (month: number) => {
 
 const initialState: CalendarState = {
   today: dayjs(),
+  activeView: 'month',
   calendarActiveDate: dayjs().clone(),
   miniCalendarActiveDate: dayjs().clone(),
   calendarMonthDays: getDaysForMonth(dayjs().get('month')),
@@ -48,8 +49,12 @@ export const calendarSlice = createSlice({
           state.miniCalendarMonthDays = getDaysForMonth(state.miniCalendarActiveDate.get('month'))
         }
       }
-    }
+    },
+    setActiveView: (state, action: PayloadAction<'month' | 'year'>) => {
+      state.activeView = action.payload
+    },
   },
+
 })
 
 export const { setCalendarMonth } = calendarSlice.actions
