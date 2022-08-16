@@ -1,0 +1,23 @@
+.Priority {
+    @apply flex flex-col w-full
+}
+
+.range {
+    @apply w-full
+}
+
+.Priority > ul {
+    @apply flex justify-between w-full
+}
+
+.low {
+    @apply text-green-600
+}
+
+.middle {
+    @apply text-yellow-600
+}
+
+.high {
+    @apply text-red-600
+}

@@ -1,0 +1,33 @@
+.ColorPicker {
+    @apply w-10 h-10 mx-1 my-1
+    rounded-full
+    hover:ring-2 ring-white active:opacity-80
+}
+
+.red {
+    @apply bg-red-500
+}
+
+.green {
+    @apply bg-green-500
+}
+
+.blue {
+    @apply bg-blue-500
+}
+
+.purple {
+    @apply bg-purple-500
+}
+
+.orange {
+    @apply bg-orange-500
+}
+
+.yellow {
+    @apply bg-yellow-500
+}
+
+.active {
+    @apply ring-2 ring-white ring-offset-1
+}

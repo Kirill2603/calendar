@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
+import styles from './Input.module.css'
 
 type InputProps = {
   value: string | undefined
   placeholder?: string
   onChange?: (value: string) => void
 }
-
 
 export const Input: FC<InputProps> = ({ value, placeholder, onChange }) => {
 
@@ -20,10 +20,7 @@ export const Input: FC<InputProps> = ({ value, placeholder, onChange }) => {
       value={value || ''}
       onChange={(event) => onInputChange(event.currentTarget.value)}
       placeholder={placeholder}
-      className='bg-neutral-800 border border-neutral-500 rounded py-0.5 outline-none my-0.5 w-full
-      focus:ring-2 ring-indigo-500
-      hover:border-neutral-400
-      placeholder:text-neutral-400 px-2'
+      className={`${styles.Input}`}
       type='text' />
   )
 }

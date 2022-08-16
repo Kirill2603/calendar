@@ -1,0 +1,15 @@
+.Button {
+    @apply border border-neutral-500 bg-neutral-500 text-lg rounded px-2 py-1 m-0.5 leading-none hover:bg-neutral-600  active:bg-neutral-400
+}
+
+.red {
+    @apply bg-red-500 hover:bg-red-600 active:bg-red-400
+}
+
+.green {
+    @apply bg-green-500 hover:bg-green-600 active:bg-green-400 leading-none
+}
+
+.active {
+    @apply bg-neutral-300 text-neutral-800
+}

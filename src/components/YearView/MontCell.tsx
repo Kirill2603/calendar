@@ -13,8 +13,8 @@ const MontCell: FC<MonthCellProps> = ({ month }) => {
   const dayNames = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
   return (
-    <div className=''>
-      <span className='text-red-400 font-bold px-2 text-lg'>{month.format('MMMM')}</span>
+    <li className='w-fit'>
+      <span className='text-red-500 font-bold px-2 text-lg'>{month.format('MMMM')}</span>
       <ul className='grid grid-cols-7 text-center gap-1 w-full py-2 font-semibold'>
         {dayNames.map((dayName, index) =>
           <li
@@ -27,13 +27,13 @@ const MontCell: FC<MonthCellProps> = ({ month }) => {
         {monthDays.map(day =>
           <li
             key={day.unix() + 'm'}
-            className={`px-1 py-1 text-neutral-300 w-fit leading-tight
+            className={`text-neutral-300 leading-tight font-bold py-0.5 px-0.5
             ${day.isSame(dayjs(), 'day') ? 'bg-red-500 rounded-full text-neutral-900 ' : ''}
             ${!day.isSame(month, 'month') ? 'text-neutral-700' : ''}`}>
             {day.format('D')}
           </li>)}
       </ul>
-    </div>
+    </li>
   )
 }
 

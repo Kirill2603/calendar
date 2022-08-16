@@ -57,4 +57,4 @@ export const calendarSlice = createSlice({
 
 })
 
-export const { setCalendarMonth } = calendarSlice.actions
+export const { setCalendarMonth, setActiveView } = calendarSlice.actions

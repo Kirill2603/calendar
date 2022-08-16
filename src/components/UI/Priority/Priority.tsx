@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC } from 'react'
 import { Priorities } from 'store/types'
+import styles from './Priority.module.css'
 
 type PriorityProps = {
   priority: Priorities | undefined
@@ -15,17 +16,17 @@ export const Priority: FC<PriorityProps> = ({ priority, onChange }) => {
   return (
     <>
       <div
-        className='flex flex-col w-full'>
+        className={styles.Priority}>
         <input
           type='range'
           value={priority}
           onChange={event => onChangePriority(event)}
-          className='w-full'
+          className={styles.range}
           min='0' max='2' step='1' />
-        <ul className='flex justify-between w-full'>
-          <li className='flex justify-center'><span className={priority === 0 ? 'text-green-600' : ''}>Low</span></li>
-          <li className='flex justify-center'><span className={priority === 1 ? 'text-yellow-600' : ''}>Middle</span></li>
-          <li className='flex justify-center'><span className={priority === 2 ? 'text-red-600' : ''}>High</span></li>
+        <ul>
+          <li><span className={`${priority === 0 && styles.low}`}>Low</span></li>
+          <li><span className={`${priority === 1 && styles.middle}`}>Middle</span></li>
+          <li><span className={`${priority === 2 && styles.high}`}>High</span></li>
         </ul>
       </div>
     </>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppSelector } from 'store/store'
-import { MonthNav } from './MonthNav/MonthNav'
+import { Navigate } from '../Navigate'
 import { MonthGrid } from './MonthGrid/MonthGrid'
 
 export const MonthView = () => {
@@ -9,7 +9,7 @@ export const MonthView = () => {
 
   return (
     <main className='flex flex-col justify-start h-full w-full'>
-      <MonthNav calendarActiveDate={calendarActiveDate}/>
+      <Navigate type='year' calendarActiveDate={calendarActiveDate}/>
       <MonthGrid today={today} calendarActiveDate={calendarActiveDate} calendarMonthDays={calendarMonthDays} />
     </main>
   )
