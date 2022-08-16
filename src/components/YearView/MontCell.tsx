@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
-import { getDaysForMonth } from '../../store/calendarSlice'
-
 
 type MonthCellProps = {
   today: Dayjs
@@ -10,7 +8,7 @@ type MonthCellProps = {
 
 const MontCell: FC<MonthCellProps> = ({ today, month }) => {
 
-  const starOfMonthGrid = dayjs(month).startOf('month').startOf('week').add(1,'day')
+  const starOfMonthGrid = dayjs(month).startOf('month').startOf('week')
   const monthDays = [...Array(42)].map((day, index) => starOfMonthGrid.add(index++, 'day'))
 
   const dayNames = ['M', 'T', 'W', 'T', 'F', 'S', 'S']

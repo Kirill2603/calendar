@@ -16,7 +16,7 @@ export const YearView: FC<YearViewProps> = ({ today, calendarActiveDate }) => {
     <main className='w-full h-full flex flex-col'>
       <Navigate type='year' calendarActiveDate={calendarActiveDate} />
       <ul className='grid grid-cols-4 w-full h-full gap-5 px-5 items-center justify-items-center'>
-        {months.map(month => <MontCell  today={today} month={month} />)}
+        {months.map(month => <MontCell key={month.unix()} today={today} month={month} />)}
       </ul>
     </main>
   )
