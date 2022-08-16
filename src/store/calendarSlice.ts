@@ -15,6 +15,7 @@ const initialState: CalendarState = {
   miniCalendarActiveDate: dayjs().clone(),
   calendarMonthDays: getDaysForMonth(dayjs().get('month')),
   miniCalendarMonthDays: getDaysForMonth(dayjs().get('month')),
+  isAdditionalPanelShow: true
 }
 
 export const calendarSlice = createSlice({
@@ -53,8 +54,11 @@ export const calendarSlice = createSlice({
     setActiveView: (state, action: PayloadAction<'month' | 'year'>) => {
       state.activeView = action.payload
     },
+    setAdditionalPanelShow: (state, action:PayloadAction<boolean>) => {
+      state.isAdditionalPanelShow = action.payload
+    }
   },
 
 })
 
-export const { setCalendarMonth, setActiveView } = calendarSlice.actions
+export const { setCalendarMonth, setActiveView, setAdditionalPanelShow } = calendarSlice.actions

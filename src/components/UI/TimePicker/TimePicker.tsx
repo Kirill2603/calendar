@@ -32,11 +32,11 @@ export const TimePicker: FC<TimePickerProps> = ({ value, onChange }) => {
         <input
           ref={inputRef}
           className={styles.timeInput}
-          type='time' min='00:00' max='23:59'
+          type='text' min='00:00' max='23:59'
           onChange={(event) => onSetTime(dayjs().clone()
             .hour(Number(event.target.value.substring(0, 2)))
             .minute(Number(event.target.value.substring(3, 5))))}
-          value={dayjs(value).format('HH:mm')} />
+          value={dayjs(value).format('HH:mm').substring(0,5)} />
         <div className={styles.dropdown} style={{ width: width }}>
         <ul className={styles.hours}>
           {hours.map(hour =>

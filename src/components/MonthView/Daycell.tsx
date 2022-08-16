@@ -2,8 +2,8 @@ import { Dayjs } from 'dayjs'
 import React, { FC, useState } from 'react'
 import { Event } from 'store/types'
 import { Button } from 'components/UI'
-import { CreateEventModalBody } from '../../Modal/CreateEventModalBody'
-import { Modal } from '../../Modal/Modal'
+import { CreateEventModalBody } from '../Modal/CreateEventModalBody'
+import { Modal } from '../Modal/Modal'
 import { EventsList } from './EventsList'
 
 type DayCellProps = {
