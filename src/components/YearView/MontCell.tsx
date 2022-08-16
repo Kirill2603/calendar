@@ -1,20 +1,23 @@
 import React, { FC } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import { getDaysForMonth } from '../../store/calendarSlice'
 
 
 type MonthCellProps = {
+  today: Dayjs
   month: Dayjs
 }
 
-const MontCell: FC<MonthCellProps> = ({ month }) => {
+const MontCell: FC<MonthCellProps> = ({ today, month }) => {
 
-  const fistDayOfMonth = dayjs(month).startOf('month').startOf('week')
-  const monthDays = [...Array(42)].map((day, index) => fistDayOfMonth.add(index, 'day'))
+  const starOfMonthGrid = dayjs(month).startOf('month').startOf('week').add(1,'day')
+  const monthDays = [...Array(42)].map((day, index) => starOfMonthGrid.add(index++, 'day'))
+
   const dayNames = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
   return (
     <li className='w-fit'>
-      <span className='text-red-500 font-bold px-2 text-lg'>{month.format('MMMM')}</span>
+      <span className='text-red-500 font-bold px-2 text-lg'>{dayjs(month).format('MMMM')}</span>
       <ul className='grid grid-cols-7 text-center gap-1 w-full py-2 font-semibold'>
         {dayNames.map((dayName, index) =>
           <li
@@ -28,8 +31,9 @@ const MontCell: FC<MonthCellProps> = ({ month }) => {
           <li
             key={day.unix() + 'm'}
             className={`text-neutral-300 leading-tight font-bold py-0.5 px-0.5
-            ${day.isSame(dayjs(), 'day') ? 'bg-red-500 rounded-full text-neutral-900 ' : ''}
-            ${!day.isSame(month, 'month') ? 'text-neutral-700' : ''}`}>
+            ${day.isSame(today, 'day') && 'bg-red-500 rounded-full text-neutral-900'}
+            ${!day.isSame(dayjs(month), 'month') && 'text-neutral-700'}
+            `}>
             {day.format('D')}
           </li>)}
       </ul>

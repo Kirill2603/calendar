@@ -1,6 +1,5 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../store/store'
-import { setCalendarMonth } from '../store/calendarSlice'
 
 export const MiniCalendar = () => {
   const dispatch = useAppDispatch()
@@ -8,7 +7,7 @@ export const MiniCalendar = () => {
   const { today, miniCalendarActiveDate, miniCalendarMonthDays } = useAppSelector(state => state.calendar)
 
   const onSetMiniCalendarMonth = (type: 'today' | 'next' | 'prev') => {
-    dispatch(setCalendarMonth({target: 'miniCalendar', action: type}))
+    // dispatch(setCalendarMonth({target: 'miniCalendar', action: type}))
   }
 
   return (

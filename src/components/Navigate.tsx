@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { setCalendarMonth } from '../store/calendarSlice'
+import { setViewDate } from '../store/calendarSlice'
 import { useAppDispatch } from '../store/store'
 import { Dayjs } from 'dayjs'
 import { Button } from 'components/UI'
@@ -14,7 +14,7 @@ export const Navigate: FC<MonthNavProps> = ({ type, calendarActiveDate }) => {
   const dispatch = useAppDispatch()
 
   const onSetMonth = (action: 'today' | 'next' | 'prev') => {
-    dispatch(setCalendarMonth({target: 'calendar', action}))
+    dispatch(setViewDate({view: type, action}))
   }
 
   return (

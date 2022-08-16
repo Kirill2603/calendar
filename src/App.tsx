@@ -7,15 +7,22 @@ import { useAppSelector } from './store/store'
 
 const App = () => {
 
+  const {
+    calendarActiveDate,
+    activeView,
+    isAdditionalPanelShow,
+    today,
+    calendarMonthDays,
+  } = useAppSelector(state => state.calendar)
 
-  const { activeView, isAdditionalPanelShow } = useAppSelector(state => state.calendar)
   return (
     <div className='flex flex-col h-full w-full'>
-      <Header activeView={activeView} isAdditionalPanelShow={isAdditionalPanelShow}/>
+      <Header activeView={activeView} isAdditionalPanelShow={isAdditionalPanelShow} />
       <div className='flex flex-row h-full w-full'>
         {isAdditionalPanelShow && <MiniCalendar />}
-        {activeView === 'year' && <YearView />}
-        {activeView === 'month' && <MonthView />}
+        {activeView === 'year' && <YearView today={today} calendarActiveDate={calendarActiveDate} />}
+        {activeView === 'month' &&
+          <MonthView today={today} calendarActiveDate={calendarActiveDate} calendarMonthDays={calendarMonthDays} />}
       </div>
     </div>
   )

@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useAppSelector } from 'store/store'
 import { Navigate } from '../Navigate'
 import { useGetEventsForMonthQuery } from '../../store/eventsSlice'
 import { DayCell } from './Daycell'
+import { Dayjs } from 'dayjs'
 
-export const MonthView = () => {
+type MonthViewProps = {
+  today: Dayjs
+  calendarActiveDate: Dayjs
+  calendarMonthDays: Dayjs[]
+}
+export const MonthView: FC<MonthViewProps> = ({ today, calendarActiveDate, calendarMonthDays }) => {
 
-  const { today, calendarActiveDate, calendarMonthDays } = useAppSelector(state => state.calendar)
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const { data: events } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
 
