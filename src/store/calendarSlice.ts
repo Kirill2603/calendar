@@ -5,8 +5,6 @@ import locale from 'dayjs/locale/en-gb'
 
 dayjs.locale(locale)
 
-console.log(dayjs().startOf('month').startOf('week'))
-
 export const getDaysForMonth = (month: number) => {
   const starOfMonthGrid = dayjs().set('date', 1).set('month', month).startOf('week')
   return [...Array(42)].map((day, index) => starOfMonthGrid.add(index++, 'day'))

@@ -34,27 +34,27 @@ export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, even
           onClick={() => setIsOpenModal(true)}
           className={`cursor-pointer p-2 m-1 leading-none ${day.isSame(today, 'day') ? 'bg-red-500 rounded-full text-neutral-800' : ''}`}>
           {day.format('DD')}
-          {isOpenModal &&
-            <Modal title={day.format('DD MMMM YYYY')} onClose={onCloseModal}>
-              <>
-                {isCreateMode
-                  ?
-                  <CreateEventModalBody day={day} onClose={onCloseModal} />
-                  :
-                  events?.length === 0 ?
-                    <>
-                      <CreateEventModalBody day={day} onClose={onCloseModal} />
-                    </>
-                    :
-                    <div className='flex flex-col justify-start align-middle items-end p-2'>
-                      <EventsList events={events} type='default' />
-                      <Button colorScheme='green' onClick={() => setIsCreateMode(true)}>Create</Button>
-                    </div>
-                }
-              </>
-            </Modal>
-          }
         </button>
+        {isOpenModal &&
+          <Modal title={day.format('DD MMMM YYYY')} onClose={onCloseModal}>
+            <>
+              {isCreateMode
+                ?
+                <CreateEventModalBody day={day} onClose={onCloseModal} />
+                :
+                events?.length === 0 ?
+                  <>
+                    <CreateEventModalBody day={day} onClose={onCloseModal} />
+                  </>
+                  :
+                  <div className='flex flex-col justify-start align-middle items-end p-2'>
+                    <EventsList events={events} type='default' />
+                    <Button colorScheme='green' onClick={() => setIsCreateMode(true)}>Create</Button>
+                  </div>
+              }
+            </>
+          </Modal>
+        }
       </div>
       <EventsList events={events} type='mini' />
     </li>
