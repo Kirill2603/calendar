@@ -1,0 +1,31 @@
+.EventDots {
+    @apply fixed translate-y-2
+}
+
+.EventDot {
+    @apply leading-none text-neutral-200 text-2xl
+}
+
+.red {
+    @apply text-red-500
+}
+
+.green {
+    @apply text-green-500
+}
+
+.blue {
+    @apply text-blue-500
+}
+
+.purple {
+    @apply text-purple-500
+}
+
+.orange {
+    @apply text-orange-500
+}
+
+.yellow {
+    @apply text-yellow-500
+}

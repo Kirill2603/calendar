@@ -10,10 +10,11 @@ type DayCellProps = {
   events: Event[] | undefined
   day: Dayjs
   today: Dayjs
+  refetch: () => void
   calendarActiveDate: Dayjs
 }
 
-export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, events }) => {
+export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, events, refetch }) => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isCreateMode, setIsCreateMode] = useState<boolean>(false)
@@ -40,15 +41,15 @@ export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, even
             <>
               {isCreateMode
                 ?
-                <CreateEventModalBody day={day} onClose={onCloseModal} />
+                <CreateEventModalBody day={day} onClose={onCloseModal} refetch={refetch}/>
                 :
                 events?.length === 0 ?
                   <>
-                    <CreateEventModalBody day={day} onClose={onCloseModal} />
+                    <CreateEventModalBody day={day} onClose={onCloseModal} refetch={refetch}/>
                   </>
                   :
                   <div className='flex flex-col justify-start align-middle items-end p-2'>
-                    <EventsList events={events} type='default' />
+                    <EventsList events={events} type='default' refetch={refetch}/>
                     <Button colorScheme='green' onClick={() => setIsCreateMode(true)}>Create</Button>
                   </div>
               }
@@ -56,7 +57,7 @@ export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, even
           </Modal>
         }
       </div>
-      <EventsList events={events} type='mini' />
+      <EventsList events={events} type='mini' refetch={refetch} />
     </li>
   )
 }

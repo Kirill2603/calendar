@@ -5,18 +5,19 @@ import { EventBudge } from './EventBudges/EventBudge'
 type EventListProps = {
   events: Event[] | undefined
   type: 'mini' | 'default'
+  refetch: () => void
 }
 
-export const EventsList: FC<EventListProps> = ({ events, type }) => {
+export const EventsList: FC<EventListProps> = ({ events, type, refetch }) => {
 
   return (
     <ul className=''>
       {events?.map(event =>
         type === 'mini'
           ?
-          <EventBudge key={event._id} event={event} type='mini' />
+          <EventBudge key={event._id} event={event} type='mini' refetch={refetch} />
           :
-          <EventBudge key={event._id} event={event} type='default' />,
+          <EventBudge key={event._id} event={event} type='default' refetch={refetch}/>,
       )}
     </ul>
   )

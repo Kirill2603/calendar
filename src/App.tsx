@@ -20,7 +20,7 @@ const App = () => {
       <Header activeView={activeView} isAdditionalPanelShow={isAdditionalPanelShow} />
       <div className='flex flex-row h-full w-full'>
         {isAdditionalPanelShow && <MiniCalendar />}
-        {activeView === 'year' && <YearView today={today} calendarActiveDate={calendarActiveDate} />}
+        {activeView === 'year' && <YearView calendarActiveDate={calendarActiveDate} />}
         {activeView === 'month' &&
           <MonthView today={today} calendarActiveDate={calendarActiveDate} calendarMonthDays={calendarMonthDays} />}
       </div>

@@ -5,14 +5,13 @@ import { Navigate } from '../Navigate'
 import { useGetAllEventsQuery } from '../../store/eventsSlice'
 
 type YearViewProps = {
-  today: Dayjs
   calendarActiveDate: Dayjs
 }
 
-export const YearView: FC<YearViewProps> = ({ today, calendarActiveDate }) => {
+export const YearView: FC<YearViewProps> = ({ calendarActiveDate }) => {
 
   const months = [...Array(12)].map((month, index) => calendarActiveDate.set('month', index).clone())
-  const { data } = useGetAllEventsQuery()
+  const { data, refetch } = useGetAllEventsQuery()
 
   return (
     <main className='w-full h-full flex flex-col'>
@@ -21,8 +20,8 @@ export const YearView: FC<YearViewProps> = ({ today, calendarActiveDate }) => {
         {months.map(month =>
           <MontCell
             key={month.unix()}
-            today={today}
             month={month}
+            refetch={refetch}
             events={data?.filter(event => dayjs(event.date).isSame(month, 'month'))} />)}
       </ul>
     </main>

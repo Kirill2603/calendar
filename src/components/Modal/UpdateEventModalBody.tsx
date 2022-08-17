@@ -2,20 +2,19 @@ import React, { FC, useState } from 'react'
 import { ColorPiker, Button, Priority, Input, TimePicker } from 'components/UI'
 import {
   useDeleteEventMutation,
-  useGetEventsForMonthQuery,
   useUpdateEventMutation,
 } from 'store/eventsSlice'
 import dayjs from 'dayjs'
-import { useAppSelector } from 'store/store'
 import { ReactComponent as RightArrowIcon } from 'assets/right-arrow.svg'
 import { Event, UpdateEventModel } from 'store/types'
 
 type UpdateEventModalBodyProps = {
   event: Event
   onClose: () => void
+  refetch: () => void
 }
 
-export const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onClose }) => {
+export const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onClose, refetch }) => {
 
   const [currentEvent, setCurrentEvent] = useState<UpdateEventModel>(
     {
@@ -30,8 +29,6 @@ export const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onC
       end: dayjs(event.end).unix()*1000,
   })
 
-  const { calendarMonthDays } = useAppSelector(state => state.calendar)
-  const { refetch } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
   const [updateEvent, updateResult] = useUpdateEventMutation()
   const [deleteEvent, deleteResult] = useDeleteEventMutation()
 

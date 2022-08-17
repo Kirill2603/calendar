@@ -1,21 +1,19 @@
 import React, { FC, useState } from 'react'
 import { ColorPiker, Button, Priority, Input, TimePicker } from 'components/UI'
 import { ReactComponent as RightArrowIcon } from '../../assets/right-arrow.svg'
-import { useAddEventMutation, useGetEventsForMonthQuery } from '../../store/eventsSlice'
+import { useAddEventMutation } from '../../store/eventsSlice'
 import dayjs, { Dayjs } from 'dayjs'
-import { useAppSelector } from '../../store/store'
 import { CreateEventModel, Priorities } from '../../store/types'
 
 type CreateEventModalBodyProps = {
   day: Dayjs
   onClose: () => void
+  refetch: () => void
 }
 
-export const CreateEventModalBody: FC<CreateEventModalBodyProps> = ({ day, onClose }) => {
+export const CreateEventModalBody: FC<CreateEventModalBodyProps> = ({ day, onClose, refetch }) => {
 
   const [addEvent, { isLoading }] = useAddEventMutation()
-  const { calendarMonthDays } = useAppSelector(state => state.calendar)
-  const { refetch } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
 
   const [currentEvent, setCurrentEvent] = useState<CreateEventModel>(
     {

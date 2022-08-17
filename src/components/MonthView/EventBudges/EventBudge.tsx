@@ -7,9 +7,10 @@ import { UpdateEventModalBody } from 'components/Modal/UpdateEventModalBody'
 type EventBudgeProps = {
   event: Event
   type: 'mini' | 'default'
+  refetch: () => void
 }
 
-export const EventBudge: FC<EventBudgeProps> = ({ event, type }) => {
+export const EventBudge: FC<EventBudgeProps> = ({ event, type, refetch }) => {
 
   const [active, setActive] = useState<boolean>(false)
 
@@ -41,7 +42,7 @@ export const EventBudge: FC<EventBudgeProps> = ({ event, type }) => {
           color={event.color}
           title={dayjs(event.date).format('DD MMMM YYYY')}
           onClose={() => setActive(false)}>
-          <UpdateEventModalBody event={event} onClose={() => setActive(false)}/>
+          <UpdateEventModalBody event={event} onClose={() => setActive(false)} refetch={refetch}/>
         </Modal>}
     </>
   )

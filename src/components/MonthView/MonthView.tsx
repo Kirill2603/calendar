@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useAppSelector } from 'store/store'
 import { Navigate } from '../Navigate'
 import { useGetEventsForMonthQuery } from '../../store/eventsSlice'
 import { DayCell } from './Daycell'
@@ -13,7 +12,7 @@ type MonthViewProps = {
 export const MonthView: FC<MonthViewProps> = ({ today, calendarActiveDate, calendarMonthDays }) => {
 
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  const { data: events } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
+  const { data: events, refetch } = useGetEventsForMonthQuery({ start: calendarMonthDays[0], end: calendarMonthDays[41] })
 
   return (
     <main className='flex flex-col justify-start h-full w-full'>
@@ -30,6 +29,7 @@ export const MonthView: FC<MonthViewProps> = ({ today, calendarActiveDate, calen
             day={day}
             calendarActiveDate={calendarActiveDate}
             today={today}
+            refetch={refetch}
             events={events?.filter(event => day.isSame(event.date, 'date'))} />,
         )}
       </ul>
