@@ -15,8 +15,6 @@ const initialState: CalendarState = {
   activeView: 'month',
   calendarActiveDate: dayjs().clone(),
   miniCalendarActiveDate: dayjs().clone(),
-  calendarMonthDays: getDaysForMonth(dayjs().get('month')),
-  miniCalendarMonthDays: getDaysForMonth(dayjs().get('month')),
   isAdditionalPanelShow: true,
 }
 
@@ -28,7 +26,6 @@ export const calendarSlice = createSlice({
       if (action.payload.action === 'today') {
         if (action.payload.view === 'month') {
           state.calendarActiveDate = dayjs()
-          state.calendarMonthDays = getDaysForMonth(dayjs().get('month'))
         } else {
           state.calendarActiveDate = dayjs()
         }
@@ -36,7 +33,6 @@ export const calendarSlice = createSlice({
       if (action.payload.action === 'next') {
         if (action.payload.view === 'month') {
           state.calendarActiveDate = state.calendarActiveDate.add(1, 'month')
-          state.calendarMonthDays = getDaysForMonth(state.calendarActiveDate.get('month'))
         } else {
           state.calendarActiveDate = state.calendarActiveDate.add(1, 'year')
         }
@@ -44,10 +40,17 @@ export const calendarSlice = createSlice({
       if (action.payload.action === 'prev') {
         if (action.payload.view === 'month') {
           state.calendarActiveDate = state.calendarActiveDate.add(-1, 'month')
-          state.calendarMonthDays = getDaysForMonth(state.calendarActiveDate.get('month'))
         } else {
           state.calendarActiveDate = state.calendarActiveDate.add(-1, 'year')
         }
+      }
+    },
+    setMiniCalendarDate: (state, action: PayloadAction<'next' | 'prev'>) => {
+      if (action.payload === 'prev') {
+        state.miniCalendarActiveDate = state.miniCalendarActiveDate.add(-1, 'month')
+      }
+      if (action.payload === 'next') {
+        state.miniCalendarActiveDate = state.miniCalendarActiveDate.add(1, 'month')
       }
     },
     setActiveView: (state, action: PayloadAction<'month' | 'year'>) => {
@@ -60,4 +63,4 @@ export const calendarSlice = createSlice({
 
 })
 
-export const {  setActiveView, setViewDate, setAdditionalPanelShow } = calendarSlice.actions
+export const {  setActiveView, setViewDate, setAdditionalPanelShow, setMiniCalendarDate} = calendarSlice.actions

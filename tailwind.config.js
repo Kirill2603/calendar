@@ -5,7 +5,21 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'linearMove': 'linearMove 2s infinite',
+      },
+      keyframes: {
+        'linearMove': {
+          'from': {
+            width: '0',
+          },
+          'to': {
+            width: '100%',
+          },
+        },
+      }
+    },
   },
   plugins: [],
   safelist: [
@@ -27,6 +41,5 @@ module.exports = {
     'text-orange-100',
     'text-yellow-100',
     'text-purple-100',
-    '-translate-y-[50%]', 'translate-x-full', '-translate-x-full'
   ],
 }

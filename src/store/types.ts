@@ -55,7 +55,5 @@ export type CalendarState = {
   activeView: 'month' | 'year'
   calendarActiveDate: Dayjs
   miniCalendarActiveDate: Dayjs
-  calendarMonthDays: Dayjs[]
-  miniCalendarMonthDays: Dayjs[]
   isAdditionalPanelShow: boolean
 }

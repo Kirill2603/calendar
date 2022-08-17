@@ -7,6 +7,7 @@ import {
 import dayjs from 'dayjs'
 import { ReactComponent as RightArrowIcon } from 'assets/right-arrow.svg'
 import { Event, UpdateEventModel } from 'store/types'
+import { SpinnerLoader } from '../UI/Loaders/SpinnerLoader/SpinnerLoader'
 
 type UpdateEventModalBodyProps = {
   event: Event
@@ -29,8 +30,8 @@ export const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onC
       end: dayjs(event.end).unix()*1000,
   })
 
-  const [updateEvent, updateResult] = useUpdateEventMutation()
-  const [deleteEvent, deleteResult] = useDeleteEventMutation()
+  const [updateEvent, {isLoading: updateProgress}] = useUpdateEventMutation()
+  const [deleteEvent, {isLoading: deleteProgress}] = useDeleteEventMutation()
 
   const onClickDelete = async () => {
     if (event._id) {
@@ -44,6 +45,14 @@ export const UpdateEventModalBody: FC<UpdateEventModalBodyProps> = ({ event, onC
     await updateEvent(currentEvent)
     await refetch()
     onClose()
+  }
+
+  if (updateProgress || deleteProgress) {
+    return (
+      <div className='w-80 h-80 flex flex-col items-center justify-center'>
+        <SpinnerLoader />
+      </div>
+    )
   }
 
   return (

@@ -9,20 +9,20 @@ const App = () => {
 
   const {
     calendarActiveDate,
+    miniCalendarActiveDate,
     activeView,
     isAdditionalPanelShow,
     today,
-    calendarMonthDays,
   } = useAppSelector(state => state.calendar)
 
   return (
     <div className='flex flex-col h-full w-full'>
       <Header activeView={activeView} isAdditionalPanelShow={isAdditionalPanelShow} />
       <div className='flex flex-row h-full w-full'>
-        {isAdditionalPanelShow && <MiniCalendar />}
+        {isAdditionalPanelShow && <MiniCalendar miniCalendarActiveDate={miniCalendarActiveDate}/>}
         {activeView === 'year' && <YearView calendarActiveDate={calendarActiveDate} />}
         {activeView === 'month' &&
-          <MonthView today={today} calendarActiveDate={calendarActiveDate} calendarMonthDays={calendarMonthDays} />}
+          <MonthView today={today} calendarActiveDate={calendarActiveDate} />}
       </div>
     </div>
   )

@@ -1,0 +1,7 @@
+.LinearLoader {
+    @apply fixed h-1 w-full bg-gray-300
+}
+
+.slide {
+    @apply bg-blue-500 w-full h-1 animate-linearMove
+}

@@ -4,6 +4,7 @@ import { ReactComponent as RightArrowIcon } from '../../assets/right-arrow.svg'
 import { useAddEventMutation } from '../../store/eventsSlice'
 import dayjs, { Dayjs } from 'dayjs'
 import { CreateEventModel, Priorities } from '../../store/types'
+import { SpinnerLoader } from '../UI/Loaders/SpinnerLoader/SpinnerLoader'
 
 type CreateEventModalBodyProps = {
   day: Dayjs
@@ -31,6 +32,14 @@ export const CreateEventModalBody: FC<CreateEventModalBodyProps> = ({ day, onClo
     await addEvent(currentEvent)
     await refetch()
     onClose()
+  }
+
+  if (isLoading) {
+    return (
+      <div className='w-80 h-80 flex flex-col items-center justify-center'>
+        <SpinnerLoader />
+      </div>
+    )
   }
 
   return (
