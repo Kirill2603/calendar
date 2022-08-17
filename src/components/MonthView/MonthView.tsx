@@ -2,14 +2,16 @@ import React, { FC } from 'react'
 import { Navigate } from '../Navigate'
 import { useGetEventsForMonthQuery } from '../../store/eventsSlice'
 import { DayCell } from './Daycell'
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { LinearLoader } from '../UI/Loaders/LinearLoader/LinearLoader'
+import { WeatherResponse } from '../../store/weatherSlice'
 
 type MonthViewProps = {
   today: Dayjs
   calendarActiveDate: Dayjs
+  weather: WeatherResponse | undefined
 }
-export const MonthView: FC<MonthViewProps> = ({ today, calendarActiveDate }) => {
+export const MonthView: FC<MonthViewProps> = ({ today, calendarActiveDate ,weather}) => {
 
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const starOfMonthGrid = calendarActiveDate.startOf('month').startOf('week')
@@ -33,6 +35,7 @@ export const MonthView: FC<MonthViewProps> = ({ today, calendarActiveDate }) => 
               day={day}
               calendarActiveDate={calendarActiveDate}
               today={today}
+              weatherForDay={weather?.list.filter(weatherItem => dayjs(weatherItem.dt*1000).isSame(day, 'date'))}
               refetch={refetch}
               events={events?.filter(event => day.isSame(event.date, 'date'))} />,
           )}

@@ -12,9 +12,10 @@ type DayCellProps = {
   today: Dayjs
   refetch: () => void
   calendarActiveDate: Dayjs
+  weatherForDay: Array<{dt: number, main: {temp: number}, weather: Array<{ main: string }> }> | undefined
 }
 
-export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, events, refetch }) => {
+export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, events, refetch, weatherForDay }) => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isCreateMode, setIsCreateMode] = useState<boolean>(false)
@@ -26,14 +27,19 @@ export const DayCell: FC<DayCellProps> = ({ day, today, calendarActiveDate, even
 
   return (
     <li
-      className={`bg-neutral-800 flex flex-col justify-start font-semibold w-full text-lg
+      className={`bg-neutral-800 flex flex-col justify-start font-semibold w-full text-lg pl-2
             ${!day.isSame(calendarActiveDate, 'month') ? 'text-neutral-500' : ''}
             ${(day.day() === 6 || day.day() === 0) ? 'bg-opacity-80' : ''}`}
     >
-      <div className='w-full flex flex-row justify-end'>
+      <div className='w-full flex flex-row justify-between items-center'>
+        {weatherForDay && (weatherForDay?.length > 0) && <span>
+          {weatherForDay[0].weather[0].main === 'Clouds' && '☁'}
+          {weatherForDay[0].weather[0].main === 'Clear' && '☀'}
+          {weatherForDay[0].weather[0].main === 'Rain' && '☂'}
+          {weatherForDay[0].main.temp.toFixed()} ℃</span>}
         <button
           onClick={() => setIsOpenModal(true)}
-          className={`cursor-pointer p-2 m-1 leading-none ${day.isSame(today, 'day') ? 'bg-red-500 rounded-full text-neutral-800' : ''}`}>
+          className={`cursor-pointer p-1.5 m-1 leading-none ${day.isSame(today, 'day') ? 'bg-red-500 rounded-full text-neutral-800' : ''}`}>
           {day.format('DD')}
         </button>
         {isOpenModal &&
