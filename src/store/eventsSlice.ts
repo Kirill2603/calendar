@@ -5,7 +5,7 @@ import { Event, CreateEventModel, UpdateEventModel } from './types'
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://evening-coast-03343.herokuapp.com/api/',
+    baseUrl: 'https://calendar-back-seven.vercel.app/',
   }),
   endpoints: (builder) => ({
     getAllEvents: builder.query<Event[], void>({
